@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_states.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcone_events.dart';
@@ -32,6 +33,7 @@ class _WelcomeState extends State<Welcome> {
                     controller: pageController,
                     onPageChanged: (index) {
                       state.page = index;
+                      // context.read<WelcomeBloc>().add(WelconeEvent());
                       BlocProvider.of<WelcomeBloc>(context).add(WelconeEvent());
                     },
                     children: [
@@ -64,8 +66,8 @@ class _WelcomeState extends State<Welcome> {
                       position: state.page,
                       dotsCount: 3,
                       decorator: DotsDecorator(
-                        color: Colors.grey,
-                        activeColor: Colors.blue,
+                        color: AppColors.primaryThirdElementText,
+                        activeColor: AppColors.primaryElement,
                         size: const Size.square(8.0),
                         activeSize: const Size(18.0, 8.0),
                         activeShape: RoundedRectangleBorder(
@@ -104,7 +106,7 @@ class _WelcomeState extends State<Welcome> {
           child: Text(
             title,
             style: TextStyle(
-                color: Colors.black,
+                color: AppColors.primaryText,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.normal),
           ),
@@ -117,7 +119,7 @@ class _WelcomeState extends State<Welcome> {
             subTitle,
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.black.withOpacity(0.5),
+                color: AppColors.primarySecondaryElementText,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.normal),
           ),
@@ -129,26 +131,20 @@ class _WelcomeState extends State<Welcome> {
             if (index < 3) {
               //animation
               pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.decelerate);
+            } else {
+              //jump to a new page
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("signIn", (route) => false);
             }
-            //else {
-            //jump to a new page
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => MyHomePage(),
-            //   ),
-            // );
-            //   Navigator.of(context)
-            //       .pushNamedAndRemoveUntil("myHomePage", (route) => false);
-            // }
           },
           child: Container(
             margin: EdgeInsets.only(top: 50.h, left: 25.w, right: 25.w),
             width: 325.w,
             height: 50.h,
             decoration: BoxDecoration(
-                color: Colors.blue,
+                color: AppColors.primaryElement,
                 borderRadius: BorderRadius.all(Radius.circular(15.w)),
                 boxShadow: [
                   BoxShadow(
