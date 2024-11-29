@@ -11,6 +11,13 @@ class AppColors {
   /// main widget color blue
   static const Color primaryElement = Color.fromARGB(255, 12, 87, 227);
 
+  /// subject widget color light blue
+  static const Color primarySecondaryElement =
+      Color.fromARGB(255, 100, 149, 241);
+
+  /// subject widget color light red
+  static const Color primaryThirdElement = Color.fromARGB(255, 240, 94, 65);
+
   /// main text color black
   static const Color primaryText = Color.fromARGB(255, 0, 0, 0);
   // video background color
@@ -28,7 +35,13 @@ class AppColors {
   static const Color primaryFourthElementText =
       Color.fromARGB(255, 204, 204, 204);
   //state color
-  static const Color primaryElementStatus = Color.fromARGB(255, 88, 174, 127);
+  static const Color primaryElementStatus = Color.fromARGB(255, 32, 172, 30);
 
   static const Color primaryElementBg = Color.fromARGB(255, 238, 121, 99);
+
+  //icon color
+  static const Color iconColorElement = Color.fromARGB(255, 16, 205, 60);
+  static const Color iconColorSecondElement = Color.fromARGB(255, 207, 193, 34);
+  static const Color iconColorThirdElement = Color.fromARGB(255, 43, 52, 227);
+  static const Color iconColorFourthElement = Color.fromARGB(255, 200, 51, 66);
 }

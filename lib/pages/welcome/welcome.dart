@@ -1,5 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
+import 'package:e_learning_klass/common/values/constant.dart';
+import 'package:e_learning_klass/global.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_states.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcone_events.dart';
@@ -135,8 +137,10 @@ class _WelcomeState extends State<Welcome> {
                   curve: Curves.decelerate);
             } else {
               //jump to a new page
+              Global.storageService
+                  .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+                  .pushNamedAndRemoveUntil("/sign_in", (route) => false);
             }
           },
           child: Container(

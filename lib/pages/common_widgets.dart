@@ -47,7 +47,7 @@ Widget _reusableIcons(String iconName) {
   );
 }
 
-Widget reusableText(String text) {
+Widget reusableText(String text, {int size = 14}) {
   return Container(
     margin: EdgeInsets.only(bottom: 5.h, top: 20.h),
     child: Text(
@@ -55,7 +55,7 @@ Widget reusableText(String text) {
       style: TextStyle(
           color: Colors.grey.withOpacity(0.5),
           fontWeight: FontWeight.normal,
-          fontSize: 14.sp),
+          fontSize: size.sp),
     ),
   );
 }

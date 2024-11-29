@@ -1,13 +1,12 @@
-import 'package:e_learning_klass/pages/application/application_page.dart';
-import 'package:e_learning_klass/pages/bloc_providers.dart';
-import 'package:e_learning_klass/pages/register/register.dart';
-import 'package:e_learning_klass/pages/sign_in/sign_in.dart';
-import 'package:e_learning_klass/pages/welcome/welcome.dart';
+import 'package:e_learning_klass/common/routes/routes.dart';
+import 'package:e_learning_klass/global.dart';
+import 'package:e_learning_klass/pages/all_students/all_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+Future<void> main() async {
+  await Global.init();
   runApp(const MyApp());
 }
 
@@ -17,8 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProviders.allBlocProviders,
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
+        designSize: const Size(375, 812),
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -27,12 +27,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
-          home: const ApplicationPage(),
-          routes: {
-            "myHomePage": (context) => const Welcome(),
-            "signIn": (context) => const SignIn(),
-            "register": (context) => const Register(),
-          },
+          onGenerateRoute: AppPages.generateRouteSettings,
         ),
       ),
     );

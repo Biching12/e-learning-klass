@@ -73,7 +73,8 @@ class _RegisterState extends State<Register> {
                     Container(
                       margin: EdgeInsets.only(left: 25.w),
                       child: reusableText(
-                          "Enter your details below and free sign up"),
+                          "By creating an account you have to agree\n with our them & condition.",
+                          size: 12),
                     ),
                     buildLogInAndRegButton("Sign Up", "login", () {
                       RegisterController(context: context)
