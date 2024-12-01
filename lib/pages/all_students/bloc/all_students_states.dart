@@ -1,0 +1,3 @@
+class AllStudentsStates {
+  const AllStudentsStates();
+}
