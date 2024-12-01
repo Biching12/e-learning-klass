@@ -40,8 +40,8 @@ class AppColors {
   static const Color primaryElementBg = Color.fromARGB(255, 238, 121, 99);
 
   //icon color
-  static const Color iconColorElement = Color.fromARGB(255, 16, 205, 60);
-  static const Color iconColorSecondElement = Color.fromARGB(255, 207, 193, 34);
+  static const Color iconColorElement = Color.fromARGB(255, 10, 165, 46);
+  static const Color iconColorSecondElement = Color.fromARGB(217, 222, 190, 8);
   static const Color iconColorThirdElement = Color.fromARGB(255, 43, 52, 227);
   static const Color iconColorFourthElement = Color.fromARGB(255, 200, 51, 66);
 }

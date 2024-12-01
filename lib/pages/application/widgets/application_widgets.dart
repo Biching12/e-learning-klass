@@ -1,6 +1,7 @@
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_blocs.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_events.dart';
+import 'package:e_learning_klass/pages/classes/classes.dart';
 import 'package:e_learning_klass/pages/home/home_page.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Widget buildPage(int index) {
   List<Widget> _widget = [
     const HomePage(),
-    Center(
-      child: Text('Class'),
-    ),
+    const Classes(),
     Center(
       child: Text('Schedule'),
     ),
     Center(
-      child: Text('Toolbox'),
-    ),
+      child: Text("Toolbox"),
+    )
   ];
 
   return _widget[index];
@@ -41,8 +40,8 @@ var bottomTabs = const [
   ),
   BottomNavigationBarItem(
     label: "Toolbox",
-    icon: Icon(FluentIcons.toolbox_24_regular),
-    activeIcon: Icon(FluentIcons.toolbox_24_filled),
+    icon: Icon(FluentIcons.chat_24_regular),
+    activeIcon: Icon(FluentIcons.chat_24_filled),
   ),
 ];
 
@@ -56,7 +55,7 @@ Widget buildBottomNavBar(
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: false,
     showUnselectedLabels: false,
-    selectedItemColor: AppColors.primaryElementStatus,
+    selectedItemColor: AppColors.primarySecondaryElement,
     unselectedItemColor: AppColors.primaryFourthElementText,
     currentIndex: index,
     onTap: (value) {

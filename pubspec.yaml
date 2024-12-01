@@ -41,6 +41,8 @@ dependencies:
   fluttertoast: ^8.2.8
   fluentui_system_icons: ^1.1.264
   shared_preferences: ^2.3.3
+  flutter_easyloading: ^3.0.5
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

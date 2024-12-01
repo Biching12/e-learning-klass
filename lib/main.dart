@@ -1,8 +1,9 @@
 import 'package:e_learning_klass/common/routes/routes.dart';
 import 'package:e_learning_klass/global.dart';
-import 'package:e_learning_klass/pages/all_students/all_students.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) => MaterialApp(
+          //builder: EasyLoading.init(),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             appBarTheme: const AppBarTheme(

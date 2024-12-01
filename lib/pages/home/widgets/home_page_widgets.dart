@@ -1,5 +1,5 @@
 import 'package:e_learning_klass/common/values/colors.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,55 +48,8 @@ Widget homePageText(String text,
   );
 }
 
-// view all grid view page
-Widget allHomePageGridView(context) {
-  return GridView.count(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    crossAxisCount: 2,
-    mainAxisSpacing: 1,
-    crossAxisSpacing: 12,
-    childAspectRatio: 1.1,
-    children: [
-      GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, "/all_students");
-        },
-        child: _buildInfoCard(
-            '35',
-            'Tổng học sinh',
-            const Icon(
-              FluentIcons.people_16_regular,
-              color: AppColors.iconColorElement,
-            )),
-      ),
-      _buildInfoCard(
-          '4',
-          'Giáo viên',
-          const Icon(
-            FluentIcons.hat_graduation_16_regular,
-            color: Color.fromARGB(255, 233, 211, 47),
-          )),
-      _buildInfoCard(
-          '3',
-          'Tổng số lớp học',
-          const Icon(
-            FluentIcons.conference_room_16_regular,
-            color: Color.fromARGB(255, 21, 141, 201),
-          )),
-      _buildInfoCard(
-          '10',
-          'Lớp hôm nay',
-          const Icon(
-            Icons.schedule,
-            color: Color.fromARGB(255, 231, 78, 93),
-          )),
-    ],
-  );
-}
-
 // information card for all view page
-Widget _buildInfoCard(String number, String label, Icon icon) {
+Widget buildInfoCard(String number, String label, Icon icon) {
   return Container(
     margin: EdgeInsets.only(top: 12.h),
     padding: EdgeInsets.all(10.w),
@@ -110,9 +63,9 @@ Widget _buildInfoCard(String number, String label, Icon icon) {
         Text(
           number,
           style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryThirdElementText),
+              fontSize: 45.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.primarySecondaryElementText),
         ),
         SizedBox(height: 4.h),
         Row(
@@ -127,48 +80,6 @@ Widget _buildInfoCard(String number, String label, Icon icon) {
               style: TextStyle(fontSize: 13.sp),
             ),
           ],
-        ),
-      ],
-    ),
-  );
-}
-
-// infor class card
-Widget buildInfoClassCard(
-    String title, String teacher, String teacherTwo, String time) {
-  return Container(
-    width: 360.w,
-    margin: EdgeInsets.only(top: 12.h),
-    padding: EdgeInsets.all(10.w),
-    decoration: BoxDecoration(
-      color: AppColors.primarySecondaryElement,
-      border: Border.all(color: AppColors.primaryFourthElementText),
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryElementText),
-        ),
-        Text(
-          "GV: $teacher",
-          style:
-              TextStyle(fontSize: 13.sp, color: AppColors.primaryElementText),
-        ),
-        Text(
-          "ĐG 1: $teacherTwo",
-          style:
-              TextStyle(fontSize: 13.sp, color: AppColors.primaryElementText),
-        ),
-        Text(
-          time,
-          style:
-              TextStyle(fontSize: 13.sp, color: AppColors.primaryElementText),
         ),
       ],
     ),
