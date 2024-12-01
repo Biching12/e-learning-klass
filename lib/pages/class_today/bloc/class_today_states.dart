@@ -1,0 +1,3 @@
+class ClassTodayStates {
+  const ClassTodayStates();
+}
