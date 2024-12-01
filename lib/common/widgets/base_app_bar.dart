@@ -3,7 +3,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
     title: Container(
@@ -24,10 +24,15 @@ AppBar buildAppBar() {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
-            child: const Icon(
-              Icons.menu,
-              color: AppColors.primarySecondaryElementText,
+          Builder(
+            builder: (context) => GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: const Icon(
+                Icons.menu,
+                color: AppColors.primarySecondaryElementText,
+              ),
             ),
           ),
           const Text(
