@@ -2,7 +2,7 @@ import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
 import 'package:e_learning_klass/common/widgets/image_and_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ClassDetail extends StatefulWidget {
@@ -257,14 +257,13 @@ class _ClassDetailState extends State<ClassDetail> {
                           color: Colors.black,
                         ),
                       ),
-                      imageAndText("Dương Quốc Minh"),
-                      imageAndText("Dương Quốc Minh"),
-                      imageAndText("Dương Quốc Minh"),
-                      imageAndText("Dương Quốc Minh"),
-                      imageAndText("Dương Quốc Minh"),
+                      imageAndText(context, "Dương Quốc Minh"),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 40.w,
+                )
               ],
             ),
           ),

@@ -20,7 +20,6 @@ class _ClassesState extends State<Classes> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
-        appBar: buildAppBar(context),
         body: Column(
           children: [
             Container(

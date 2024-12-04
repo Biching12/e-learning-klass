@@ -1,14 +1,16 @@
 import 'package:e_learning_klass/common/entities/entities.dart';
 import 'package:e_learning_klass/common/utils/http_util.dart';
+import 'package:e_learning_klass/common/values/constant.dart';
 
 class UserAPI {
-  static login({LoginRequestEntity? params}) async {
-    var response = await HttpUtil().post(
-      'api/login',
-      queryParameters: params?.toJson(),
-    );
+  static Future<LoginResponseEntity> login(
+      {required LoginRequestEntity params}) async {
+    try {
+      final data = await HttpUtil().post('/auth/login', data: params.toJson());
 
-    print(response.toString());
-    return UserLoginResponseEntity.fromJson(response);
+      return LoginResponseEntity.fromJson(data);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

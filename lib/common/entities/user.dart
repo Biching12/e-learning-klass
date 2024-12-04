@@ -1,93 +1,37 @@
 class LoginRequestEntity {
-  int? type;
-  String? name;
-  String? description;
-  String? email;
-  String? phone;
-  String? avatar;
-  String? open_id;
-  int? online;
+  final String email;
+  final String password;
 
-  LoginRequestEntity({
-    this.type,
-    this.name,
-    this.description,
-    this.email,
-    this.phone,
-    this.avatar,
-    this.open_id,
-    this.online,
-  });
+  LoginRequestEntity({required this.email, required this.password});
 
   Map<String, dynamic> toJson() => {
-        "type": type,
-        "name": name,
-        "description": description,
-        "email": email,
-        "phone": phone,
-        "avatar": avatar,
-        "openId": open_id,
-        "online": online,
+        'email': email,
+        'password': password,
       };
 }
 
-//api post response msg
-class UserLoginResponseEntity {
-  int? code;
-  String? msg;
-  UserItem? data;
+class LoginResponseEntity {
+  final String? accessToken;
+  final String? refreshToken;
+  final String? accessTokenExpireTime;
+  final String? refreshTokenExpireTime;
+  final String? tokenType;
 
-  UserLoginResponseEntity({
-    this.code,
-    this.msg,
-    this.data,
+  LoginResponseEntity({
+    this.accessToken,
+    this.refreshToken,
+    this.accessTokenExpireTime,
+    this.refreshTokenExpireTime,
+    this.tokenType,
   });
 
-  factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
-      UserLoginResponseEntity(
-        code: json["code"],
-        msg: json["msg"],
-        data: UserItem.fromJson(json["data"]),
-      );
-}
-
-// login result
-class UserItem {
-  String? access_token;
-  String? token;
-  String? name;
-  String? description;
-  String? avatar;
-  int? online;
-  int? type;
-
-  UserItem({
-    this.access_token,
-    this.token,
-    this.name,
-    this.description,
-    this.avatar,
-    this.online,
-    this.type,
-  });
-
-  factory UserItem.fromJson(Map<String, dynamic> json) => UserItem(
-        access_token: json["access_token"],
-        token: json["token"],
-        name: json["name"],
-        description: json["description"],
-        avatar: json["avatar"],
-        online: json["online"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "access_token": access_token,
-        "token": token,
-        "name": name,
-        "description": description,
-        "avatar": avatar,
-        "online": online,
-        "type": type,
-      };
+  factory LoginResponseEntity.fromJson(Map<String, dynamic> json) {
+    return LoginResponseEntity(
+      accessToken: json['access_token'],
+      refreshToken: json['refresh_token'],
+      accessTokenExpireTime: json['access_token_expire_time'],
+      refreshTokenExpireTime: json['refresh_token_expire_time'],
+      tokenType: json['token_type'],
+    );
+  }
 }

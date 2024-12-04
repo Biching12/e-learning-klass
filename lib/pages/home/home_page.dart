@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
-        appBar: buildAppBar(context),
-        drawer: baseNavBar(),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),

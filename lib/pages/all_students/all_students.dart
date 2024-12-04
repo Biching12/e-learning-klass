@@ -55,7 +55,7 @@ class _AllStudentsState extends State<AllStudents> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 itemCount: 20,
                 itemBuilder: (context, index) {
-                  return imageAndText("Dương Quốc Minh");
+                  return imageAndText(context, "Dương Quốc Minh");
                 },
               ),
             )

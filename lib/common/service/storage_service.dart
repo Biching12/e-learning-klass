@@ -14,7 +14,11 @@ class StorageService {
   }
 
   Future<bool> setString(String key, String value) async {
-    return await setString(key, value);
+    return await _prefs.setString(key, value);
+  }
+
+  Future<bool> setInt(String key, int value) async {
+    return await _prefs.setInt(key, value);
   }
 
   bool getDeviceFirstOpen() {
@@ -22,8 +26,48 @@ class StorageService {
   }
 
   bool getIsLoggedIn() {
-    return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) == null
-        ? true
-        : false;
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_KEY) == null
+        ? false
+        : true;
+  }
+
+  // Save all infomation token when login success
+  Future<void> saveTokens({
+    required String accessToken,
+    required String refreshToken,
+    required String accessTokenExpireTime,
+    required String refreshTokenExpireTime,
+  }) async {
+    await setString(AppConstants.STORAGE_ACCESS_TOKEN_KEY, accessToken);
+    await setString(AppConstants.STORAGE_REFRESH_TOKEN_KEY, refreshToken);
+    await setString(
+        AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME, accessTokenExpireTime);
+    await setString(
+        AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME, refreshTokenExpireTime);
+  }
+
+  // get infor access token
+  String? getAccessToken() {
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_KEY);
+  }
+
+  //get infor refresh token
+  String? getRefreshToken() {
+    return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN_KEY);
+  }
+
+  int? getAccessTokenExpireTime() {
+    return _prefs.getInt(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
+  }
+
+  int? getRefreshTokenExpireTime() {
+    return _prefs.getInt(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
+  }
+
+  Future<void> clearTokens() async {
+    await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN_KEY);
+    await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN_KEY);
+    await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
+    await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
   }
 }
