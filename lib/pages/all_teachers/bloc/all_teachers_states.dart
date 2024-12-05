@@ -1,0 +1,3 @@
+class AllTeachersStates {
+  const AllTeachersStates();
+}
