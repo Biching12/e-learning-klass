@@ -1,6 +1,7 @@
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
 import 'package:e_learning_klass/common/widgets/base_icon.dart';
+import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
 import 'package:e_learning_klass/common/widgets/devider_line.dart';
 import 'package:e_learning_klass/common/widgets/image_and_text.dart';
 
@@ -23,6 +24,7 @@ class _AllStudentsState extends State<AllStudents> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
+        drawer: baseNavBar(),
         body: Column(
           children: [
             Container(

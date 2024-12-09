@@ -2,39 +2,89 @@ import 'package:e_learning_klass/common/widgets/flutter_toast.dart';
 import 'package:e_learning_klass/pages/register/bloc/register_blocs.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:e_learning_klass/common/apis/user_api.dart';
+import 'package:e_learning_klass/common/entities/entities.dart';
 
 class RegisterController {
   final BuildContext context;
+
   const RegisterController({required this.context});
 
-  void handleEmailRegister() {
+  Future<void> handleEmailRegister() async {
     final state = context.read<RegisterBloc>().state;
-    String userName = state.userName;
-    String email = state.email;
-    String password = state.password;
-    String rePassword = state.rePassword;
 
-    if (userName.isEmpty) {
-      toastInfo(msg: "User name can not be emty!");
+    // Kiểm tra các trường nhập liệu
+    if (state.email.isEmpty) {
+      toastInfo(msg: "Email can not be empty!");
       return;
     }
 
-    if (email.isEmpty) {
-      toastInfo(msg: "Email can not be emty!");
+    if (state.password.isEmpty) {
+      toastInfo(msg: "Password can not be empty!");
       return;
     }
 
-    if (password.isEmpty) {
-      toastInfo(msg: "Password can not be emty!");
+    if (state.rePassword.isEmpty) {
+      toastInfo(msg: "Please re-enter your password!");
+      return;
+    } else if (state.rePassword != state.password) {
+      toastInfo(msg: "Password confirmation does not match!");
       return;
     }
 
-    if (rePassword.isEmpty) {
-      toastInfo(msg: "Please re-enter your password");
+    if (state.phoneNumber.isEmpty) {
+      toastInfo(msg: "Phone number can not be empty!");
       return;
-    } else if (rePassword != password) {
-      toastInfo(msg: "Your password confirmation is wrong!");
+    }
+
+    if (state.dateOfBirth.isEmpty) {
+      toastInfo(msg: "Date of birth is required!");
       return;
+    }
+
+    if (state.gender.isEmpty) {
+      toastInfo(msg: "Gender is required!");
+      return;
+    }
+
+    if (state.firstName.isEmpty) {
+      toastInfo(msg: "First name cannot be empty!");
+      return;
+    }
+
+    if (state.lastName.isEmpty) {
+      toastInfo(msg: "Last name cannot be empty!");
+      return;
+    }
+
+    EasyLoading.show(status: 'Registering...');
+
+    try {
+      final registerRequest = RegisterRequestEntity(
+        email: state.email.trim(),
+        password: state.password.trim(),
+        firstName: state.firstName.trim(),
+        lastName: state.lastName.trim(),
+        phoneNumber: state.phoneNumber.trim(),
+        dateOfBirth: state.dateOfBirth,
+        gender: state.gender.trim(),
+      );
+
+      // Gọi API đăng ký
+      await UserAPI.register(params: registerRequest);
+
+      // Nếu thành công, chuyển sang màn hình đăng nhập
+      toastInfo(msg: "Registration successful!, Please verify your email.");
+      if (context.mounted) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/login", (route) => false);
+      }
+    } catch (e) {
+      print("Error: $e");
+      toastInfo(msg: "An unexpected error occurred. Please try again.");
+    } finally {
+      EasyLoading.dismiss();
     }
   }
 }

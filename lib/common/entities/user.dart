@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class LoginRequestEntity {
   final String email;
   final String password;
@@ -33,5 +35,37 @@ class LoginResponseEntity {
       refreshTokenExpireTime: json['refresh_token_expire_time'],
       tokenType: json['token_type'],
     );
+  }
+}
+
+class RegisterRequestEntity {
+  final String email;
+  final String password;
+  final String firstName;
+  final String lastName;
+  final String phoneNumber;
+  final String dateOfBirth;
+  final String gender;
+
+  RegisterRequestEntity({
+    required this.email,
+    required this.password,
+    required this.firstName,
+    required this.lastName,
+    required this.phoneNumber,
+    required this.dateOfBirth,
+    required this.gender,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'password': password,
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone_number': phoneNumber,
+      'date_of_birth': dateOfBirth,
+      'gender': gender,
+    };
   }
 }

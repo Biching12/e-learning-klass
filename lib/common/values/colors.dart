@@ -20,8 +20,8 @@ class AppColors {
 
   /// main text color black
   static const Color primaryText = Color.fromARGB(255, 0, 0, 0);
-  // video background color
-  static const Color primary_bg = Color.fromARGB(210, 32, 47, 62);
+  // devider line color
+  static const Color deviderLineColorElement = Color.fromARGB(210, 32, 47, 62);
 
   /// main widget text color white
   static const Color primaryElementText = Color.fromARGB(255, 255, 255, 255);

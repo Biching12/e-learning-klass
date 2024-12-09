@@ -2,6 +2,8 @@ import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/global.dart';
 import 'package:e_learning_klass/pages/all_students/all_students.dart';
 import 'package:e_learning_klass/pages/all_students/bloc/all_students_blocs.dart';
+import 'package:e_learning_klass/pages/all_teachers/all_teachers.dart';
+import 'package:e_learning_klass/pages/all_teachers/bloc/all_teachers_blocs.dart';
 import 'package:e_learning_klass/pages/application/application_page.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_blocs.dart';
 import 'package:e_learning_klass/pages/class_detail/bloc/class_detail_blocs.dart';
@@ -22,6 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppPages {
   static List<PageEntity> routes() {
     return [
+      //Router for first screen
       PageEntity(
         route: AppRoutes.initial,
         page: const Welcome(),
@@ -29,6 +32,7 @@ class AppPages {
           create: (_) => WelcomeBloc(),
         ),
       ),
+      //Router for sign in screen
       PageEntity(
         route: AppRoutes.signIn,
         page: const SignIn(),
@@ -36,6 +40,7 @@ class AppPages {
           create: (_) => SignInBloc(),
         ),
       ),
+      //Router for register screen
       PageEntity(
         route: AppRoutes.register,
         page: const Register(),
@@ -43,6 +48,7 @@ class AppPages {
           create: (_) => RegisterBloc(),
         ),
       ),
+      //Router for application
       PageEntity(
         route: AppRoutes.application,
         page: const ApplicationPage(),
@@ -50,6 +56,7 @@ class AppPages {
           create: (_) => AppBloc(),
         ),
       ),
+      //Router for all students screen
       PageEntity(
         route: AppRoutes.allStudents,
         page: const AllStudents(),
@@ -57,6 +64,7 @@ class AppPages {
           create: (_) => AllStudentsBlocs(),
         ),
       ),
+      //Router for class detail screen
       PageEntity(
         route: AppRoutes.classDetail,
         page: const ClassDetail(),
@@ -64,6 +72,7 @@ class AppPages {
           create: (_) => ClassDetailBlocs(),
         ),
       ),
+      //Router for all classes screen
       PageEntity(
         route: AppRoutes.allClasses,
         page: const Classes(),
@@ -71,11 +80,20 @@ class AppPages {
           create: (_) => ClassesBlocs(),
         ),
       ),
+      //Router for class today
       PageEntity(
         route: AppRoutes.classToday,
         page: const ClassToday(),
         bloc: BlocProvider(
           create: (_) => ClassTodayBlocs(),
+        ),
+      ),
+      //Router for all teachers
+      PageEntity(
+        route: AppRoutes.allTeachers,
+        page: const AllTeachers(),
+        bloc: BlocProvider(
+          create: (_) => AllTeachersBlocs(),
         ),
       )
     ];

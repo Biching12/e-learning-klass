@@ -49,13 +49,18 @@ class _HomePageState extends State<HomePage> {
                             color: AppColors.iconColorElement,
                           )),
                     ),
-                    buildInfoCard(
-                        '4',
-                        'Giáo viên',
-                        const Icon(
-                          FluentIcons.hat_graduation_16_regular,
-                          color: AppColors.iconColorSecondElement,
-                        )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/all_teachers");
+                      },
+                      child: buildInfoCard(
+                          '4',
+                          'Giáo viên',
+                          const Icon(
+                            FluentIcons.hat_graduation_16_regular,
+                            color: AppColors.iconColorSecondElement,
+                          )),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, "/all_classes");

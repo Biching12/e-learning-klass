@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(const RegisterState()) {
-    on<UserNameEvent>(_userNameEvent);
     on<EmailEvent>(_emailEvent);
     on<PasswordEvent>(_passwordEvent);
     on<RePasswordEvent>(_rePasswordEvent);
-  }
-  void _userNameEvent(UserNameEvent event, Emitter<RegisterState> emit) {
-    emit(state.copyWith(userName: event.userName));
+    on<PhoneNumberEvent>(_phoneNumberEvent);
+    on<DateOfBirthEvent>(_dateOfBirthEvent);
+    on<GenderEvent>(_genderEvent);
+    on<FirstNameEvent>(_firstNameEvent);
+    on<LastNameEvent>(_lastNameEvent);
   }
 
   void _emailEvent(EmailEvent event, Emitter<RegisterState> emit) {
@@ -23,5 +24,27 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   void _rePasswordEvent(RePasswordEvent event, Emitter<RegisterState> emit) {
     emit(state.copyWith(rePassword: event.rePassword));
+  }
+
+  void _phoneNumberEvent(PhoneNumberEvent event, Emitter<RegisterState> emit) {
+    emit(state.copyWith(phoneNumber: event.phoneNumber));
+  }
+
+  void _dateOfBirthEvent(DateOfBirthEvent event, Emitter<RegisterState> emit) {
+    print("dateofBirth:${event.dateOfBirth}");
+    emit(state.copyWith(dateOfBirth: event.dateOfBirth));
+  }
+
+  void _genderEvent(GenderEvent event, Emitter<RegisterState> emit) {
+    print("gender:${event.gender}");
+    emit(state.copyWith(gender: event.gender));
+  }
+
+  void _firstNameEvent(FirstNameEvent event, Emitter<RegisterState> emit) {
+    emit(state.copyWith(firstName: event.firstName));
+  }
+
+  void _lastNameEvent(LastNameEvent event, Emitter<RegisterState> emit) {
+    emit(state.copyWith(lastName: event.lastName));
   }
 }

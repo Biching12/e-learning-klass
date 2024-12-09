@@ -15,4 +15,6 @@ class AppRoutes {
   static const allClasses = '/all_classes';
   //for showing class today
   static const classToday = '/class_today';
+  //all teachers page
+  static const allTeachers = '/all_teachers';
 }

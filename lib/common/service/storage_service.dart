@@ -38,12 +38,14 @@ class StorageService {
     required String accessTokenExpireTime,
     required String refreshTokenExpireTime,
   }) async {
-    await setString(AppConstants.STORAGE_ACCESS_TOKEN_KEY, accessToken);
-    await setString(AppConstants.STORAGE_REFRESH_TOKEN_KEY, refreshToken);
-    await setString(
-        AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME, accessTokenExpireTime);
-    await setString(
-        AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME, refreshTokenExpireTime);
+    await Future.wait([
+      setString(AppConstants.STORAGE_ACCESS_TOKEN_KEY, accessToken),
+      setString(AppConstants.STORAGE_REFRESH_TOKEN_KEY, refreshToken),
+      setString(
+          AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME, accessTokenExpireTime),
+      setString(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME,
+          refreshTokenExpireTime),
+    ]);
   }
 
   // get infor access token
@@ -56,12 +58,12 @@ class StorageService {
     return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN_KEY);
   }
 
-  int? getAccessTokenExpireTime() {
-    return _prefs.getInt(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
+  String? getAccessTokenExpireTime() {
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
   }
 
-  int? getRefreshTokenExpireTime() {
-    return _prefs.getInt(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
+  String? getRefreshTokenExpireTime() {
+    return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
   }
 
   Future<void> clearTokens() async {

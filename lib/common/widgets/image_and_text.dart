@@ -1,9 +1,11 @@
 import 'package:e_learning_klass/common/values/colors.dart';
+import 'package:e_learning_klass/common/widgets/base_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget imageAndText(BuildContext context, String text) {
+Widget imageAndText(BuildContext context, String text,
+    {bool changeText = true}) {
   return ListTile(
     leading: CircleAvatar(
       backgroundColor: Colors.grey[300],
@@ -20,7 +22,7 @@ Widget imageAndText(BuildContext context, String text) {
       // Handle student item tap
       showDialog(
         context: context,
-        builder: (context) {
+        builder: (_) {
           return Dialog(
             child: Container(
               padding: EdgeInsets.all(12.w),
@@ -53,30 +55,16 @@ Widget imageAndText(BuildContext context, String text) {
                     ],
                   ),
                   buildTitleAndDesc("Số điện thoại", "089238482384"),
-                  buildTitleAndDesc("Lớp đang học", "English 10"),
+                  (changeText == false)
+                      ? buildTitleAndDesc("Lớp đang dạy", "English 10")
+                      : buildTitleAndDesc("Lớp đang học", "English 10"),
                   buildTitleAndDesc("Ngày sinh", "15/05/2002"),
                   buildTitleAndDesc("Giới tính", "Nam"),
                   buildTitleAndDesc("Địa chỉ", "Ba Đình, Hà Nội"),
                   buildLinked("Liên kết: ", "https://www.figma.com/"),
-                  Container(
-                    margin: EdgeInsets.only(top: 10.h),
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const RoundedRectangleBorder(),
-                        backgroundColor: AppColors.primarySecondaryElement,
-                        foregroundColor: AppColors.primaryBackground,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 50,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Hủy"),
-                    ),
-                  )
+                  baseButton("Hủy", onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
+import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
 import 'package:e_learning_klass/common/widgets/information_class_card.dart';
 import 'package:e_learning_klass/pages/home/widgets/home_page_widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _ClassTodayState extends State<ClassToday> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
+        drawer: baseNavBar(),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
@@ -27,12 +29,17 @@ class _ClassTodayState extends State<ClassToday> {
               children: [
                 homePageTitle("Điểm danh"),
                 homePageText("Bấm vào lớp bên dưới để điểm danh"),
-                buildInfoClassCard(
-                  "English 10",
-                  "Nguyễn Minh Phương",
-                  "Ngô Thục Anh",
-                  '12',
-                  "18:30 - 20:30",
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/class_detail");
+                  },
+                  child: buildInfoClassCard(
+                    "English 10",
+                    "Nguyễn Minh Phương",
+                    "Ngô Thục Anh",
+                    '12',
+                    "18:30 - 20:30",
+                  ),
                 ),
                 homePageText(
                     "Việc không điểm danh có thể ảnh hưởng tới tính năng tính lương và thu học phí!",
