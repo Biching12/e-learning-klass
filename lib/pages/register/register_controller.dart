@@ -71,10 +71,10 @@ class RegisterController {
         gender: state.gender.trim(),
       );
 
-      // Gọi API đăng ký
+      // call API register
       await UserAPI.register(params: registerRequest);
 
-      // Nếu thành công, chuyển sang màn hình đăng nhập
+      // if success navigator to login
       toastInfo(msg: "Registration successful!, Please verify your email.");
       if (context.mounted) {
         Navigator.of(context)

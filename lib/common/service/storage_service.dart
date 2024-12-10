@@ -27,8 +27,8 @@ class StorageService {
 
   bool getIsLoggedIn() {
     return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_KEY) == null
-        ? false
-        : true;
+        ? true
+        : false;
   }
 
   // Save all infomation token when login success
