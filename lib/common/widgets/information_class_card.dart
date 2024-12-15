@@ -17,8 +17,8 @@ Widget _buidText(String text,
   );
 }
 
-Widget buildInfoClassCard(String title, String teacher, String assistant,
-    String studentCount, String time,
+Widget buildInfoClassCard(
+    String title, String teacher, String studentCount, String time,
     {int? boder}) {
   return Container(
     width: 360.w,
@@ -40,7 +40,6 @@ Widget buildInfoClassCard(String title, String teacher, String assistant,
       children: [
         _buidText(title, size: 20, fontweight: FontWeight.bold),
         _buidText("GV: $teacher"),
-        _buidText("ĐG: $assistant"),
         SizedBox(
           height: 12.h,
         ),

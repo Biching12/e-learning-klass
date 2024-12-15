@@ -24,8 +24,8 @@ Widget classCard() {
           bottom: -40,
           left: 0,
           right: 0,
-          child: buildInfoClassCard("English 10", "Nguyễn Minh Phương",
-              "Ngô Thục Anh", '12', "18:30 - 20:30",
+          child: buildInfoClassCard(
+              "English 10", "Nguyễn Minh Phương", '12', "18:30 - 20:30",
               boder: 1),
         ),
       ],

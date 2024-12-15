@@ -3,6 +3,7 @@ import 'package:e_learning_klass/pages/application/bloc/app_blocs.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_events.dart';
 import 'package:e_learning_klass/pages/classes/classes.dart';
 import 'package:e_learning_klass/pages/home/home_page.dart';
+import 'package:e_learning_klass/pages/school_schedule/school_schedule.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +12,7 @@ Widget buildPage(int index) {
   List<Widget> _widget = [
     const HomePage(),
     const Classes(),
-    Center(
-      child: Text('Schedule'),
-    ),
+    const SchoolSchedule(),
     Center(
       child: Text("Toolbox"),
     )

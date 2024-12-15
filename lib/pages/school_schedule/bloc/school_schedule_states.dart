@@ -1,0 +1,3 @@
+class SchoolScheduleStates {
+  const SchoolScheduleStates();
+}

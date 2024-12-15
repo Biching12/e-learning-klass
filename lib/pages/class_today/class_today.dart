@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
 import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
@@ -31,12 +32,11 @@ class _ClassTodayState extends State<ClassToday> {
                 homePageText("Bấm vào lớp bên dưới để điểm danh"),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, "/class_detail");
+                    Navigator.pushNamed(context, AppRoutes.classDetail);
                   },
                   child: buildInfoClassCard(
                     "English 10",
                     "Nguyễn Minh Phương",
-                    "Ngô Thục Anh",
                     '12',
                     "18:30 - 20:30",
                   ),

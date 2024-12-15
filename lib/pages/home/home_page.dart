@@ -96,7 +96,6 @@ class _HomePageState extends State<HomePage> {
                   child: buildInfoClassCard(
                     "English 10",
                     "Nguyễn Minh Phương",
-                    "Ngô Thục Anh",
                     '12',
                     "18:30 - 20:30",
                   ),
