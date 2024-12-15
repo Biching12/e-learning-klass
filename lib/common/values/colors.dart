@@ -34,12 +34,13 @@ class AppColors {
 
   static const Color primaryFourthElementText =
       Color.fromARGB(255, 204, 204, 204);
+
   //state color
-  static const Color primaryElementStatus = Color.fromARGB(255, 32, 172, 30);
+  static const Color primaryElementStatus = Color.fromARGB(255, 19, 192, 129);
 
   static const Color primaryElementBg = Color.fromARGB(255, 238, 121, 99);
 
-  //icon color
+  //icon colors
   static const Color iconColorElement = Color.fromARGB(255, 10, 165, 46);
   static const Color iconColorSecondElement = Color.fromARGB(217, 222, 190, 8);
   static const Color iconColorThirdElement = Color.fromARGB(255, 43, 52, 227);

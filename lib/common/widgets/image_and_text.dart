@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget imageAndText(BuildContext context, String text,
+Widget imageAndText(BuildContext context, String text, String subtext,
     {bool changeText = true}) {
   return ListTile(
     leading: CircleAvatar(
@@ -15,7 +15,15 @@ Widget imageAndText(BuildContext context, String text,
       text,
       style: TextStyle(
         fontSize: 16.sp,
-        color: Colors.black, // Adjust color based on your theme
+        color: AppColors.primaryText, // Adjust color based on your theme
+      ),
+    ),
+    subtitle: Text(
+      "Số ngày nghỉ: $subtext",
+      style: TextStyle(
+        fontSize: 14.sp,
+        color: AppColors
+            .primarySecondaryElementText, // Adjust color based on your theme
       ),
     ),
     onTap: () {

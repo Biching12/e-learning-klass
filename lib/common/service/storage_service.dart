@@ -26,9 +26,9 @@ class StorageService {
   }
 
   bool getIsLoggedIn() {
-    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_KEY) == null
-        ? true
-        : false;
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN) == null
+        ? false
+        : true;
   }
 
   // Save all infomation token when login success
@@ -39,8 +39,8 @@ class StorageService {
     required String refreshTokenExpireTime,
   }) async {
     await Future.wait([
-      setString(AppConstants.STORAGE_ACCESS_TOKEN_KEY, accessToken),
-      setString(AppConstants.STORAGE_REFRESH_TOKEN_KEY, refreshToken),
+      setString(AppConstants.STORAGE_ACCESS_TOKEN, accessToken),
+      setString(AppConstants.STORAGE_REFRESH_TOKEN, refreshToken),
       setString(
           AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME, accessTokenExpireTime),
       setString(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME,
@@ -50,12 +50,12 @@ class StorageService {
 
   // get infor access token
   String? getAccessToken() {
-    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_KEY);
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN);
   }
 
   //get infor refresh token
   String? getRefreshToken() {
-    return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN_KEY);
+    return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN);
   }
 
   String? getAccessTokenExpireTime() {
@@ -67,8 +67,8 @@ class StorageService {
   }
 
   Future<void> clearTokens() async {
-    await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN_KEY);
-    await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN_KEY);
+    await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN);
+    await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN);
     await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
     await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
   }

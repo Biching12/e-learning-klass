@@ -24,7 +24,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
         return SafeArea(
           child: Scaffold(
             appBar: buildAppBar(context),
-            drawer: baseNavBar(),
+            drawer: baseNavBar(context),
             backgroundColor: AppColors.primaryBackground,
             body: buildPage(state.index),
             bottomNavigationBar: Container(

@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:e_learning_klass/pages/sign_in/bloc/signin_events.dart';
 import 'package:e_learning_klass/pages/sign_in/bloc/signin_states.dart';
@@ -67,7 +68,7 @@ class _SignInState extends State<SignIn> {
                       SignInController(context: context).handleSignIn("email");
                     }),
                     buildLogInAndRegButton("Register", "register", () {
-                      Navigator.of(context).pushNamed("/register");
+                      Navigator.of(context).pushNamed(AppRoutes.register);
                     }),
                   ],
                 ),

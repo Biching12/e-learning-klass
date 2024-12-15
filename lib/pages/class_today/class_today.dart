@@ -20,7 +20,7 @@ class _ClassTodayState extends State<ClassToday> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
-        drawer: baseNavBar(),
+        drawer: baseNavBar(context),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),

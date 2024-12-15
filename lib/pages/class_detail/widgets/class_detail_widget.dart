@@ -1,5 +1,7 @@
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_button.dart';
+import 'package:e_learning_klass/common/widgets/base_show_dialog.dart';
+import 'package:e_learning_klass/common/widgets/base_text_field.dart';
 import 'package:e_learning_klass/common/widgets/image_and_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -236,7 +238,9 @@ Widget lessonDetail(
 }
 
 // widget student list and search
-Widget studentList(BuildContext context) {
+Widget studentList(
+  BuildContext context,
+) {
   return Container(
     margin: EdgeInsets.only(bottom: 40.h),
     width: double.infinity,
@@ -252,34 +256,30 @@ Widget studentList(BuildContext context) {
           "Danh sách học sinh",
           style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
         ),
-        const TextField(
-          decoration: InputDecoration(
-            hintText: 'Tìm kiếm...', // Placeholder text
-            hintStyle: TextStyle(
-              color: Colors.grey,
-              fontSize: 14.0,
+        baseTextField(),
+        GestureDetector(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => baseShowDialog(context),
+            );
+          },
+          child: Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 12.h),
+            padding: EdgeInsets.all(8.w),
+            decoration: BoxDecoration(
+              color: AppColors.primaryElementStatus,
+              borderRadius: BorderRadius.circular(6.w),
             ),
-            border: InputBorder.none, // Remove default border
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey, // Custom underline color
-                width: 1.0,
-              ),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors
-                    .primaryFourthElementText, // Underline color when focused
-                width: 1,
-              ),
-            ),
-          ),
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black,
+            child: const Center(
+                child: Text(
+              "Thêm học sinh",
+              style: TextStyle(color: AppColors.primaryElementText),
+            )),
           ),
         ),
-        imageAndText(context, "Dương Quốc Minh"),
+        imageAndText(context, "Dương Quốc Minh", "3"),
       ],
     ),
   );

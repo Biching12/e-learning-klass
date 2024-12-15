@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/widgets/flutter_toast.dart';
 import 'package:e_learning_klass/pages/register/bloc/register_blocs.dart';
 import 'package:flutter/widgets.dart';
@@ -78,10 +79,9 @@ class RegisterController {
       toastInfo(msg: "Registration successful!, Please verify your email.");
       if (context.mounted) {
         Navigator.of(context)
-            .pushNamedAndRemoveUntil("/login", (route) => false);
+            .pushNamedAndRemoveUntil(AppRoutes.signIn, (route) => false);
       }
     } catch (e) {
-      print("Error: $e");
       toastInfo(msg: "An unexpected error occurred. Please try again.");
     } finally {
       EasyLoading.dismiss();

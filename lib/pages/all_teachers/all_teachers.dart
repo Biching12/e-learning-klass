@@ -22,7 +22,7 @@ class _AllTeachersState extends State<AllTeachers> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
-        drawer: baseNavBar(),
+        drawer: baseNavBar(context),
         body: Column(
           children: [
             Container(
@@ -55,7 +55,7 @@ class _AllTeachersState extends State<AllTeachers> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return imageAndText(context, "Liễu Như Hoa",
+                  return imageAndText(context, "Liễu Như Hoa", "3",
                       changeText: false);
                 },
               ),

@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class LoginRequestEntity {
   final String email;
   final String password;

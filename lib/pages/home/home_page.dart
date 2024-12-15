@@ -1,6 +1,6 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
-import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
-import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
+
 import 'package:e_learning_klass/common/widgets/information_class_card.dart';
 import 'package:e_learning_klass/pages/home/widgets/home_page_widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/all_students");
+                        Navigator.pushNamed(context, AppRoutes.allStudents);
                       },
                       child: buildInfoCard(
                           '35',
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/all_teachers");
+                        Navigator.pushNamed(context, AppRoutes.allTeachers);
                       },
                       child: buildInfoCard(
                           '4',
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/all_classes");
+                        Navigator.pushNamed(context, AppRoutes.allClasses);
                       },
                       child: buildInfoCard(
                           '3',
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/class_today");
+                        Navigator.pushNamed(context, AppRoutes.classToday);
                       },
                       child: buildInfoCard(
                           '1',
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 homePageText("Bấm vào lớp bên dưới để điểm danh"),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, "/class_detail");
+                    Navigator.pushNamed(context, AppRoutes.classDetail);
                   },
                   child: buildInfoClassCard(
                     "English 10",

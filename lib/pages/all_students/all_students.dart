@@ -24,7 +24,7 @@ class _AllStudentsState extends State<AllStudents> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
-        drawer: baseNavBar(),
+        drawer: baseNavBar(context),
         body: Column(
           children: [
             Container(
@@ -57,11 +57,27 @@ class _AllStudentsState extends State<AllStudents> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 itemCount: 20,
                 itemBuilder: (context, index) {
-                  return imageAndText(context, "Dương Quốc Minh");
+                  return imageAndText(context, "Dương Quốc Minh", "4");
                 },
               ),
             )
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) => addStudentDialog(context),
+            );
+          },
+          backgroundColor: AppColors.primarySecondaryElement,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50), // Make it circular
+          ),
+          child: const Icon(
+            Icons.add,
+            color: AppColors.primaryBackground,
+          ),
         ),
       ),
     );

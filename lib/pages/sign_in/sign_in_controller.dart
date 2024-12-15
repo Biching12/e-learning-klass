@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_learning_klass/common/apis/user_api.dart';
 import 'package:e_learning_klass/common/entities/entities.dart';
+import 'package:e_learning_klass/common/routes/names.dart';
 
 import 'package:e_learning_klass/common/widgets/flutter_toast.dart';
 import 'package:e_learning_klass/global.dart';
@@ -67,7 +68,7 @@ class SignInController {
         // Use 'context' safely after async call
         if (context.mounted) {
           Navigator.of(context)
-              .pushNamedAndRemoveUntil("/application", (route) => false);
+              .pushNamedAndRemoveUntil(AppRoutes.application, (route) => false);
         }
       } else {
         toastInfo(msg: "Invalid credentials or user does not exist");

@@ -1,10 +1,11 @@
+import 'package:e_learning_klass/common/apis/user_api.dart';
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
-
 import 'package:e_learning_klass/common/widgets/base_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Drawer baseNavBar() {
+Drawer baseNavBar(BuildContext context) {
   return Drawer(
     backgroundColor: AppColors.primaryBackground,
     child: ListView(
@@ -56,7 +57,14 @@ Drawer baseNavBar() {
             size: 20.w,
           ),
           title: baseText("Đăng xuất"),
-          onTap: () {},
+          onTap: () async {
+            await UserAPI
+                .logout(); // Gửi yêu cầu logout tới API và xóa thông tin cục bộ
+            if (context.mounted) {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(AppRoutes.signIn, (route) => false);
+            }
+          },
         ),
       ],
     ),
