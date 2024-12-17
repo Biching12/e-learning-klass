@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:e_learning_klass/common/entities/current_user.dart';
 import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,19 +34,28 @@ class StorageService {
         : true;
   }
 
+  CurrentUserDataEntity getCurrentUserData() {
+    var currentUserData =
+        _prefs.getString(AppConstants.STORAGE_CURRENT_USER) ?? "";
+    if (currentUserData.isNotEmpty) {
+      return CurrentUserDataEntity.fromJson(jsonDecode(currentUserData));
+    }
+    return CurrentUserDataEntity();
+  }
+
   // Save all infomation token when login success
   Future<void> saveTokens({
     required String accessToken,
     required String refreshToken,
-    required String accessTokenExpireTime,
-    required String refreshTokenExpireTime,
+    required int accessTokenExpireTime,
+    required int refreshTokenExpireTime,
   }) async {
     await Future.wait([
       setString(AppConstants.STORAGE_ACCESS_TOKEN, accessToken),
       setString(AppConstants.STORAGE_REFRESH_TOKEN, refreshToken),
-      setString(
+      setInt(
           AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME, accessTokenExpireTime),
-      setString(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME,
+      setInt(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME,
           refreshTokenExpireTime),
     ]);
   }
@@ -58,12 +70,12 @@ class StorageService {
     return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN);
   }
 
-  String? getAccessTokenExpireTime() {
-    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
+  int? getAccessTokenExpireTime() {
+    return _prefs.getInt(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
   }
 
-  String? getRefreshTokenExpireTime() {
-    return _prefs.getString(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
+  int? getRefreshTokenExpireTime() {
+    return _prefs.getInt(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
   }
 
   Future<void> clearTokens() async {

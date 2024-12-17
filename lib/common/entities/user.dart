@@ -11,13 +11,31 @@ class LoginRequestEntity {
 }
 
 class LoginResponseEntity {
-  final String? accessToken;
-  final String? refreshToken;
-  final String? accessTokenExpireTime;
-  final String? refreshTokenExpireTime;
-  final String? tokenType;
+  final bool? success;
+  final LoginDataEntity? data;
 
   LoginResponseEntity({
+    this.success,
+    this.data,
+  });
+
+  factory LoginResponseEntity.fromJson(Map<String, dynamic> json) {
+    return LoginResponseEntity(
+      success: json['success'],
+      data:
+          json['data'] != null ? LoginDataEntity.fromJson(json['data']) : null,
+    );
+  }
+}
+
+class LoginDataEntity {
+  final String? accessToken;
+  final String? refreshToken;
+  final int? accessTokenExpireTime;
+  final int? refreshTokenExpireTime;
+  final String? tokenType;
+
+  LoginDataEntity({
     this.accessToken,
     this.refreshToken,
     this.accessTokenExpireTime,
@@ -25,12 +43,16 @@ class LoginResponseEntity {
     this.tokenType,
   });
 
-  factory LoginResponseEntity.fromJson(Map<String, dynamic> json) {
-    return LoginResponseEntity(
+  factory LoginDataEntity.fromJson(Map<String, dynamic> json) {
+    return LoginDataEntity(
       accessToken: json['access_token'],
       refreshToken: json['refresh_token'],
-      accessTokenExpireTime: json['access_token_expire_time'],
-      refreshTokenExpireTime: json['refresh_token_expire_time'],
+      accessTokenExpireTime: json['access_token_expire_time'] != null
+          ? int.tryParse(json['access_token_expire_time'].toString())
+          : null, // Chuyển đổi sang int
+      refreshTokenExpireTime: json['refresh_token_expire_time'] != null
+          ? int.tryParse(json['refresh_token_expire_time'].toString())
+          : null, // Chuyển đổi sang int
       tokenType: json['token_type'],
     );
   }
@@ -65,5 +87,19 @@ class RegisterRequestEntity {
       'date_of_birth': dateOfBirth,
       'gender': gender,
     };
+  }
+}
+
+class RegisterResponseEntity {
+  final bool? success;
+
+  RegisterResponseEntity({
+    this.success,
+  });
+
+  factory RegisterResponseEntity.fromJson(Map<String, dynamic> json) {
+    return RegisterResponseEntity(
+      success: json['success'],
+    );
   }
 }

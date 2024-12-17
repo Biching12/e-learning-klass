@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:e_learning_klass/common/path_apis/api_constants.dart';
+import 'package:e_learning_klass/common/entities/refresh_token.dart';
+
+import 'package:e_learning_klass/common/values/api_constants.dart';
 import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:e_learning_klass/global.dart';
 
@@ -34,8 +36,11 @@ class HttpUtil {
 
         // Get temporarily saved tokens from local storage
         String? accessToken = Global.storageService.getAccessToken();
-        String? expiredTime = Global.storageService.getAccessTokenExpireTime();
+        int? expiredTime = Global.storageService.getAccessTokenExpireTime();
         String? refreshToken = Global.storageService.getRefreshToken();
+
+        //convert expiredTime type int to String
+        String expiredTimeString = expiredTime.toString();
 
         // Check if the user is logged in or not. If not, then call handler.next(options) to return data to the client
         if (accessToken == null ||
@@ -48,7 +53,7 @@ class HttpUtil {
         DateTime expiredTimeConvert;
         try {
           expiredTimeConvert = DateTime.parse(
-              expiredTime); // Try to parse the expiredTime string
+              expiredTimeString); // Try to parse the expiredTime string
         } catch (e) {
           // print("Invalid expired time format: $expiredTime");
           return handler
@@ -58,37 +63,39 @@ class HttpUtil {
 
         if (isExpired) {
           try {
-            final response = await HttpUtil().post(ApiConstants.refreshToken,
+            final response = await HttpUtil().post(AppAPI.refreshToken,
                 data: {"refresh_token": refreshToken});
-            if (response.statusCode == 200) {
-              if (response.data["access_token"] != null) {
-                options.headers['Authorization'] =
-                    "Bearer ${response.data["access_token"]}";
 
-                final expiredTime = DateTime.now().add(
-                  Duration(
-                      seconds:
-                          int.parse(response.data["access_token_expire_time"])),
-                );
+            // Parse response thành RefreshTokenResponseEntity
+            final refreshResponse =
+                RefreshTokenResponseEntity.fromJson(response);
 
-                await Global.storageService.setString(
-                    AppConstants.STORAGE_ACCESS_TOKEN,
-                    response.data["access_token"]);
-                await Global.storageService.setString(
-                    AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME,
-                    expiredTime.toString());
-              }
+            if (refreshResponse.success == true &&
+                refreshResponse.data != null) {
+              final refreshData = refreshResponse.data!;
+
+              final newAccessToken = refreshData.accessToken;
+
+              // Cập nhật accessToken và thời gian hết hạn
+              options.headers['Authorization'] = "Bearer $newAccessToken";
+
+              final expiredTime = DateTime.now().add(
+                Duration(milliseconds: refreshData.accessTokenExpireTime),
+              );
+
+              // Lưu trữ vào local storage
+              await Global.storageService.setString(
+                  AppConstants.STORAGE_ACCESS_TOKEN, refreshData.accessToken);
+              await Global.storageService.setString(
+                  AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME,
+                  expiredTime.toString());
+
+              // Tiếp tục request hiện tại với accessToken mới
+              return handler.next(options);
             }
-            return handler.next(options);
           } on DioException catch (error) {
-            // logout();
-            // print("logout");
             return handler.reject(error, true);
           }
-        } else {
-          // Attach the access_token to the header, include the access_token in the header every time you call the API
-          options.headers['Authorization'] = "Bearer $accessToken";
-          return handler.next(options);
         }
       },
       onResponse: (response, handle) {
@@ -96,9 +103,9 @@ class HttpUtil {
       },
       onError: (error, handler) async {
         if (error.response?.statusCode != 401) {
-          //logout if end session
-          // logout();
-          // print("Error: ${error.response}");
+          // Nếu lỗi 401, xóa token và chuyển người dùng về màn hình đăng nhập
+          await Global.storageService.clearTokens();
+          print("Session expired. Logging out...");
         }
         return handler.next(error);
       },
@@ -106,10 +113,38 @@ class HttpUtil {
   }
 
   Future post(String path,
-      {dynamic data, Map<String, dynamic>? queryParameters}) async {
-    var response =
-        await dio.post(path, data: data, queryParameters: queryParameters);
-    // print("My status code is ${response.statusCode.toString()}");
-    return response.data;
+      {dynamic data,
+      Map<String, dynamic>? queryParameters,
+      Map<String, String>? headers}) async {
+    try {
+      // Thêm headers truyền từ bên ngoài vào request (nếu có)
+      if (headers != null) {
+        dio.options.headers.addAll(headers);
+      }
+
+      var response =
+          await dio.post(path, data: data, queryParameters: queryParameters);
+      return response.data;
+    } catch (e) {
+      print("Error in POST request: $e");
+      rethrow;
+    }
+  }
+
+  Future get(String path,
+      {Map<String, dynamic>? queryParameters,
+      Map<String, String>? headers}) async {
+    try {
+      // Thêm headers truyền từ bên ngoài vào request (nếu có)
+      if (headers != null) {
+        dio.options.headers.addAll(headers);
+      }
+
+      var response = await dio.get(path, queryParameters: queryParameters);
+      return response.data;
+    } catch (e) {
+      print("Error in GET request: $e");
+      rethrow;
+    }
   }
 }

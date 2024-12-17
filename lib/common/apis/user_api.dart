@@ -1,39 +1,34 @@
-import 'package:e_learning_klass/common/entities/entities.dart';
-import 'package:e_learning_klass/common/path_apis/api_constants.dart';
+import 'package:e_learning_klass/common/entities/current_user.dart';
 import 'package:e_learning_klass/common/utils/http_util.dart';
+import 'package:e_learning_klass/common/values/api_constants.dart';
 import 'package:e_learning_klass/global.dart';
 
 class UserAPI {
-  static Future<LoginResponseEntity> login(
-      {required LoginRequestEntity params}) async {
+  static Future<CurrentUserEntity> getCurrentUser() async {
     try {
-      final data =
-          await HttpUtil().post(ApiConstants.login, data: params.toJson());
-      return LoginResponseEntity.fromJson(data);
+      // Lấy access token từ bộ nhớ cục bộ
+      String? accessToken = Global.storageService.getAccessToken();
+
+      if (accessToken == null) {
+        throw Exception("Access token not found. Please log in.");
+      }
+
+      // Tạo header Authorization với Bearer token
+      final Map<String, String> headers = {
+        "Authorization": "Bearer $accessToken",
+      };
+
+      // Gửi yêu cầu GET để lấy thông tin người dùng
+      final response = await HttpUtil().get(
+        AppAPI.currentUser, // Endpoint /api/user/me
+        headers: headers,
+      );
+
+      // Parse response thành CurrentUserEntity
+      return CurrentUserEntity.fromJson(response);
     } catch (e) {
+      print("Error fetching current user: $e");
       rethrow;
-    }
-  }
-
-  static Future<void> register({
-    required RegisterRequestEntity params,
-  }) async {
-    try {
-      await HttpUtil().post(ApiConstants.register, data: params.toJson());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  static Future<void> logout() async {
-    try {
-      // Gửi yêu cầu logout tới API
-      await HttpUtil().post(ApiConstants.logout, data: {});
-
-      // Xóa thông tin token khỏi bộ nhớ cục bộ
-      await Global.storageService.clearTokens();
-    } catch (e) {
-      print("Error during logout: $e");
     }
   }
 }
