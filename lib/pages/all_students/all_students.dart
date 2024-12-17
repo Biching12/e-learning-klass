@@ -24,7 +24,7 @@ class _AllStudentsState extends State<AllStudents> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
-        drawer: baseNavBar(context),
+        drawer: const BaseNavBar(),
         body: Column(
           children: [
             Container(

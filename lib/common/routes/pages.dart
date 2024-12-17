@@ -14,6 +14,8 @@ import 'package:e_learning_klass/pages/classes/bloc/classes_blocs.dart';
 import 'package:e_learning_klass/pages/classes/classes.dart';
 import 'package:e_learning_klass/pages/register/bloc/register_blocs.dart';
 import 'package:e_learning_klass/pages/register/register.dart';
+import 'package:e_learning_klass/pages/school_schedule/bloc/school_schedule_blocs.dart';
+import 'package:e_learning_klass/pages/school_schedule/school_schedule.dart';
 import 'package:e_learning_klass/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:e_learning_klass/pages/sign_in/sign_in.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_blocs.dart';
@@ -88,12 +90,20 @@ class AppPages {
           create: (_) => ClassTodayBlocs(),
         ),
       ),
-      //Router for all teachers
+      // Router for all teachers
       PageEntity(
         route: AppRoutes.allTeachers,
         page: const AllTeachers(),
         bloc: BlocProvider(
           create: (_) => AllTeachersBlocs(),
+        ),
+      ),
+      // Router for school schedule
+      PageEntity(
+        route: AppRoutes.schoolSchedule,
+        page: const SchoolSchedule(),
+        bloc: BlocProvider(
+          create: (_) => SchoolScheduleBlocs(),
         ),
       )
     ];

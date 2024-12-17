@@ -4,7 +4,7 @@ import 'package:e_learning_klass/pages/register/bloc/register_blocs.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:e_learning_klass/common/apis/user_api.dart';
+import 'package:e_learning_klass/common/apis/authentication_api.dart';
 import 'package:e_learning_klass/common/entities/entities.dart';
 
 class RegisterController {
@@ -73,13 +73,17 @@ class RegisterController {
       );
 
       // call API register
-      await UserAPI.register(params: registerRequest);
+      final result = await AuthenticationAPI.register(params: registerRequest);
 
       // if success navigator to login
-      toastInfo(msg: "Registration successful!, Please verify your email.");
-      if (context.mounted) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(AppRoutes.signIn, (route) => false);
+      if (result.success == true) {
+        toastInfo(msg: "Registration successful!, Please verify your email.");
+        if (context.mounted) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(AppRoutes.signIn, (route) => false);
+        }
+      } else {
+        toastInfo(msg: "Registration failed. Please try again.");
       }
     } catch (e) {
       toastInfo(msg: "An unexpected error occurred. Please try again.");

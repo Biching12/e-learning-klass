@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:e_learning_klass/common/apis/user_api.dart';
+import 'package:e_learning_klass/common/apis/authentication_api.dart';
 import 'package:e_learning_klass/common/entities/entities.dart';
 import 'package:e_learning_klass/common/routes/names.dart';
 
@@ -48,16 +48,16 @@ class SignInController {
       );
 
       // Send login request to API
-      final result = await UserAPI.login(params: loginRequest);
+      final result = await AuthenticationAPI.login(params: loginRequest);
 
       // Handle successful response
-      if (result.accessToken != null) {
+      if (result.success == true && result.data != null) {
         // Save all token related data to local storage
         await Global.storageService.saveTokens(
-          accessToken: result.accessToken!,
-          refreshToken: result.refreshToken!,
-          accessTokenExpireTime: result.accessTokenExpireTime!,
-          refreshTokenExpireTime: result.refreshTokenExpireTime!,
+          accessToken: result.data!.accessToken!,
+          refreshToken: result.data!.refreshToken!,
+          accessTokenExpireTime: result.data!.accessTokenExpireTime!,
+          refreshTokenExpireTime: result.data!.refreshTokenExpireTime!,
         );
 
         // Optionally store expiration times if needed

@@ -21,7 +21,7 @@ class _ClassDetailState extends State<ClassDetail> {
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
         appBar: buildAppBar(context),
-        drawer: baseNavBar(context),
+        drawer: const BaseNavBar(),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(
