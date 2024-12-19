@@ -66,9 +66,6 @@ Widget classInfor(String title, String teacher, String studentCount) {
         SizedBox(
           height: 8.w,
         ),
-        SizedBox(
-          height: 8.w,
-        ),
         Text(
           "Sĩ số: $studentCount",
           style: TextStyle(

@@ -1,7 +1,9 @@
 import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
+import 'package:e_learning_klass/common/widgets/base_title.dart';
 
 import 'package:e_learning_klass/common/widgets/information_class_card.dart';
+import 'package:e_learning_klass/common/widgets/line_and_text.dart';
 import 'package:e_learning_klass/pages/home/widgets/home_page_widgets.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +28,8 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                homePageTitle("Thông tin chung"),
-                homePageText(
+                baseTitle("Thông tin chung"),
+                lineAndText(
                     "Chạm vào số sẽ chuyển hướng tới màn hình tương ứng!"),
                 GridView.count(
                   shrinkWrap: true,
@@ -87,8 +89,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                homePageTitle("Điểm danh"),
-                homePageText("Bấm vào lớp bên dưới để điểm danh"),
+                baseTitle("Điểm danh"),
+                lineAndText("Bấm vào lớp bên dưới để điểm danh"),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutes.classDetail);
@@ -96,14 +98,12 @@ class _HomePageState extends State<HomePage> {
                   child: buildInfoClassCard(
                     "English 10",
                     "Nguyễn Minh Phương",
-                    '12',
-                    "18:30 - 20:30",
                   ),
                 ),
-                homePageText(
+                lineAndText(
                     "Việc không điểm danh có thể ảnh hưởng tới tính năng tính lương và thu học phí!",
                     color: AppColors.primaryThirdElement),
-                homePageTitle("Học sinh vắng hôm nay (6)"),
+                baseTitle("Học sinh vắng hôm nay (6)"),
                 slidersViewStudend(
                   context,
                   List.generate(12, (index) => 'Dương Quốc Minh'),

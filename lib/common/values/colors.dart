@@ -18,6 +18,9 @@ class AppColors {
   /// subject widget color light red
   static const Color primaryThirdElement = Color.fromARGB(255, 240, 94, 65);
 
+  // subject widget color super light blue
+  static const Color primaryFourthElement = Color.fromARGB(255, 7, 1, 35);
+
   /// main text color black
   static const Color primaryText = Color.fromARGB(255, 0, 0, 0);
   // devider line color
@@ -36,7 +39,7 @@ class AppColors {
       Color.fromARGB(255, 204, 204, 204);
 
   //state color
-  static const Color primaryElementStatus = Color.fromARGB(255, 19, 192, 129);
+  static const Color primaryElementStatus = Color.fromARGB(255, 10, 181, 118);
 
   static const Color primaryElementBg = Color.fromARGB(255, 238, 121, 99);
 

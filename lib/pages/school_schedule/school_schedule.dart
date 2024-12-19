@@ -1,5 +1,6 @@
 import 'package:e_learning_klass/common/routes/routes.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
+import 'package:e_learning_klass/common/widgets/base_icon.dart';
 import 'package:e_learning_klass/common/widgets/devider_line.dart';
 import 'package:e_learning_klass/common/widgets/information_class_card.dart';
 import 'package:e_learning_klass/pages/school_schedule/widgets/school_schedule_widget.dart';
@@ -16,7 +17,7 @@ class SchoolSchedule extends StatefulWidget {
 }
 
 class _SchoolScheduleState extends State<SchoolSchedule> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  final CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
 
   DateTime? _selectedDay;
@@ -50,6 +51,25 @@ class _SchoolScheduleState extends State<SchoolSchedule> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 10.h,
+                horizontal: 25.w,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      baseIcon(const Icon(Icons.filter_list)),
+                      baseIcon(const Icon(Icons.abc_sharp)),
+                      baseIcon(const Icon(Icons.more_vert), left: 0),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            dividerLine(),
             TableCalendar(
               focusedDay: _focusedDay,
               firstDay: DateTime.utc(2010, 3, 14),
@@ -95,8 +115,6 @@ class _SchoolScheduleState extends State<SchoolSchedule> {
                 child: buildInfoClassCard(
                   "English 10",
                   "Nguyễn Minh Phương",
-                  '12',
-                  "18:30 - 20:30",
                 ),
               ),
             ),

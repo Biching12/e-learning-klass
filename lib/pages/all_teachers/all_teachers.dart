@@ -4,7 +4,7 @@ import 'package:e_learning_klass/common/widgets/base_icon.dart';
 import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
 import 'package:e_learning_klass/common/widgets/devider_line.dart';
 import 'package:e_learning_klass/common/widgets/image_and_text.dart';
-import 'package:e_learning_klass/pages/all_students/widgets/all_students_widgets.dart';
+import 'package:e_learning_klass/pages/all_teachers/widgets/all_teachers_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,13 +33,8 @@ class _AllTeachersState extends State<AllTeachers> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      buildText("4",
-                          color: AppColors.primarySecondaryElementText),
-                      buildText("Tất cả",
-                          color: AppColors.primarySecondaryElementText,
-                          right: 140),
                       baseIcon(const Icon(Icons.filter_list)),
                       baseIcon(const Icon(Icons.abc_sharp)),
                       baseIcon(const Icon(Icons.more_vert), left: 0),
@@ -66,7 +61,7 @@ class _AllTeachersState extends State<AllTeachers> {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (_) => addStudentDialog(context),
+              builder: (_) => addTeacherDialog(context),
             );
           },
           backgroundColor: AppColors.primarySecondaryElement,

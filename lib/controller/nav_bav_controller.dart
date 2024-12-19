@@ -9,7 +9,7 @@ class NavBavController {
   String? userEmail;
   String? userAvatarUrl;
 
-  void fetchCurrentUser() async {
+  Future<void> fetchCurrentUser() async {
     try {
       final currentUser = await UserAPI.getCurrentUser();
 
@@ -30,8 +30,8 @@ class NavBavController {
     }
   }
 
-  void init() {
+  Future<void> init() {
     print("...Navbar controller init method...");
-    fetchCurrentUser();
+    return fetchCurrentUser();
   }
 }
