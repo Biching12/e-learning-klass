@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
 
 import 'package:e_learning_klass/common/widgets/base_icon.dart';
@@ -65,7 +66,8 @@ class _ClassesState extends State<Classes> {
                         final classroom = state.classrooms[index];
                         return GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, "/class_detail",
+                              Navigator.pushNamed(
+                                  context, AppRoutes.classDetail,
                                   arguments: classroom.id);
                             },
                             child: classCard(classroom));

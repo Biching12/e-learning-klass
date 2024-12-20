@@ -57,22 +57,6 @@ class _AllTeachersState extends State<AllTeachers> {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (_) => addTeacherDialog(context),
-            );
-          },
-          backgroundColor: AppColors.primarySecondaryElement,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50), // Make it circular
-          ),
-          child: const Icon(
-            Icons.add,
-            color: AppColors.primaryBackground,
-          ),
-        ),
       ),
     );
   }

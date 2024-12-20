@@ -9,14 +9,16 @@ class AppRoutes {
   static const register = "/register";
   //all students page
   static const allStudents = '/all_students';
-  //for showing class detail
+  //showing class detail
   static const classDetail = '/class_detail';
-  //for showing all classes
+  //showing all classes
   static const allClasses = '/all_classes';
-  //for showing class today
+  //showing class today
   static const classToday = '/class_today';
   //all teachers page
   static const allTeachers = '/all_teachers';
   //school schedule page
   static const schoolSchedule = '/school_schedule';
+  //home page
+  static const homePage = '/home_page';
 }

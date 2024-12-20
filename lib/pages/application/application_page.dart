@@ -2,9 +2,9 @@ import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
 import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
 import 'package:e_learning_klass/common/widgets/base_text.dart';
-import 'package:e_learning_klass/common/widgets/base_text_field.dart';
+
 import 'package:e_learning_klass/common/widgets/base_text_form_field.dart';
-import 'package:e_learning_klass/common/widgets/expandable_section.dart';
+
 import 'package:e_learning_klass/pages/application/bloc/app_blocs.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_states.dart';
 import 'package:e_learning_klass/pages/application/widgets/application_widgets.dart';
@@ -24,8 +24,11 @@ class _ApplicationPageState extends State<ApplicationPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController classNameController = TextEditingController();
   final TextEditingController feeController = TextEditingController();
+  List<String> schedules = [
+    'Thứ năm, 19:00 - 22:00',
+    'Thứ năm, 19:00 - 22:00',
+  ];
 
-  bool isAdditionalInfoExpanded = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
@@ -84,25 +87,111 @@ class _ApplicationPageState extends State<ApplicationPage> {
                                       return null;
                                     },
                                   ),
-                                  const SizedBox(height: 8),
-                                  buildExpandableSection(
-                                    title: 'Lịch học',
-                                    isExpanded: true,
-                                    icon: Icons.add,
-                                    onToggle: () {
-                                      setState(() {});
-                                    },
+                                  const SizedBox(height: 12),
+                                  const Text(
+                                    'Lịch học',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color(0xFF00C087),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                  buildExpandableSection(
-                                    title: 'Thông tin thêm',
-                                    isExpanded: isAdditionalInfoExpanded,
-                                    icon: Icons.expand_more,
-                                    onToggle: () {
-                                      setState(() {
-                                        isAdditionalInfoExpanded =
-                                            !isAdditionalInfoExpanded;
-                                      });
-                                    },
+                                  const SizedBox(height: 6),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      // Schedule list
+                                      ...schedules.map(
+                                        (schedule) => Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 5),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                schedule,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                              const Spacer(),
+                                              Container(
+                                                width: 24,
+                                                height: 24,
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xFF1A237E),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: IconButton(
+                                                  padding: EdgeInsets.zero,
+                                                  icon: const Icon(
+                                                    Icons.close,
+                                                    size: 16,
+                                                    color: Colors.white,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      schedules
+                                                          .remove(schedule);
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          width: 32,
+                                          height: 32,
+                                          decoration: const BoxDecoration(
+                                            color: Color(0xFF00C087),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: IconButton(
+                                            padding: EdgeInsets.zero,
+                                            icon: const Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 24,
+                                            ),
+                                            onPressed: () {
+                                              // Add new schedule logic here
+                                              setState(() {
+                                                schedules.add(
+                                                    'Thứ năm, 19:00 - 22:00');
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Thông tin thêm',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xFF00C087),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: Color(0xFF00C087),
+                                          size: 24,
+                                        ),
+                                        onPressed: () {
+                                          // Toggle additional info section
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
