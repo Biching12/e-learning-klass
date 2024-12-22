@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:e_learning_klass/common/entities/current_user.dart';
 import 'package:e_learning_klass/common/utils/http_util.dart';
 import 'package:e_learning_klass/common/values/api_constants.dart';
+import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:e_learning_klass/global.dart';
 
 class UserAPI {
@@ -25,7 +28,15 @@ class UserAPI {
       );
 
       // Parse response thành CurrentUserEntity
-      return CurrentUserEntity.fromJson(response);
+      final currentUser = CurrentUserEntity.fromJson(response);
+      if (currentUser.success && currentUser.data != null) {
+        // Lưu thông tin người dùng vào bộ nhớ cục bộ
+        await Global.storageService.setString(
+          AppConstants.STORAGE_CURRENT_USER,
+          jsonEncode(currentUser.data!.toJson()),
+        );
+      }
+      return currentUser;
     } catch (e) {
       print("Error fetching current user: $e");
       rethrow;

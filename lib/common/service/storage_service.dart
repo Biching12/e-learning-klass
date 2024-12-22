@@ -84,4 +84,8 @@ class StorageService {
     await _prefs.remove(AppConstants.STORAGE_ACCESS_TOKEN_EXPIRE_TIME);
     await _prefs.remove(AppConstants.STORAGE_REFRESH_TOKEN_EXPIRE_TIME);
   }
+
+  Future<void> clearUserData() async {
+    await _prefs.remove(AppConstants.STORAGE_CURRENT_USER);
+  }
 }

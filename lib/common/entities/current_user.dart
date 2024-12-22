@@ -44,4 +44,14 @@ class CurrentUserDataEntity {
       role: json['role'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'email': email,
+      'first_name': firstName,
+      'last_name': lastName,
+      'avatar_url': avatarUrl,
+      'role': role,
+    };
+  }
 }

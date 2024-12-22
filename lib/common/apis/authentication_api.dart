@@ -10,6 +10,7 @@ class AuthenticationAPI {
     try {
       final response =
           await HttpUtil().post(AppAPI.login, data: params.toJson());
+
       return LoginResponseEntity.fromJson(response);
     } catch (e) {
       rethrow;
@@ -61,6 +62,7 @@ class AuthenticationAPI {
       }
       // Xóa thông tin token khỏi bộ nhớ cục bộ
       await Global.storageService.clearTokens();
+      await Global.storageService.clearUserData();
       print("Logout successful. Tokens cleared.");
     } catch (e) {
       print("Error during logout: $e");

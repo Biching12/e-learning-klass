@@ -1,8 +1,10 @@
 import 'package:e_learning_klass/common/apis/authentication_api.dart';
+
 import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_text.dart';
 import 'package:e_learning_klass/controller/nav_bav_controller.dart';
+
 import 'package:e_learning_klass/pages/application/bloc/app_blocs.dart';
 import 'package:e_learning_klass/pages/application/bloc/app_events.dart';
 import 'package:flutter/material.dart';
@@ -22,24 +24,28 @@ class _BaseNavBarState extends State<BaseNavBar> {
   @override
   void initState() {
     super.initState();
-    _navBavController = NavBavController(context: context);
-    _navBavController.init();
+    _navBavController = NavBavController();
+    _navBavController.init().then((_) {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentUserData = _navBavController.currentUserData;
     return Drawer(
       backgroundColor: AppColors.primaryBackground,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text(_navBavController.userName ?? "Loading..."),
-            accountEmail: Text(_navBavController.userEmail ?? "Loading..."),
+            accountName: Text(
+                "${currentUserData.firstName ?? ''} ${currentUserData.lastName ?? 'Loading...'}"),
+            accountEmail: Text(currentUserData.email ?? "Loading..."),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: _navBavController.userAvatarUrl != null
+                child: currentUserData.avatarUrl != null
                     ? Image.network(
-                        _navBavController.userAvatarUrl!,
+                        currentUserData.avatarUrl!,
                         width: 90.w,
                         height: 90.h,
                         fit: BoxFit.cover,
@@ -48,7 +54,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
               ),
             ),
             decoration: const BoxDecoration(
-              color: AppColors.primaryElement,
+              color: AppColors.primarySecondaryElementText,
               image: DecorationImage(
                   image: NetworkImage(
                     "https://cdn.pixabay.com/photo/2022/09/21/17/02/blue-background-7470781_1280.jpg",
