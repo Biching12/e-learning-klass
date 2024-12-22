@@ -114,11 +114,15 @@ class FileEntity {
 
 class StudentEntity {
   final int id;
+  final String fullName;
   final String? avatarUrl;
 
-  StudentEntity({required this.id, this.avatarUrl});
+  StudentEntity({required this.id, this.avatarUrl, required this.fullName});
 
   factory StudentEntity.fromJson(Map<String, dynamic> json) {
-    return StudentEntity(id: json['id'], avatarUrl: json['avatar_url']);
+    return StudentEntity(
+        id: json['id'],
+        avatarUrl: json['avatar_url'],
+        fullName: json['full_name']);
   }
 }

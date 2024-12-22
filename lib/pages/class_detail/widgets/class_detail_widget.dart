@@ -52,27 +52,15 @@ Widget classInfor(String title, String teacher, String studentCount) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
-        ),
+        _buildTitle(title),
         SizedBox(
           height: 8.w,
         ),
-        Text(
-          "Giáo viên: $teacher",
-          style: TextStyle(fontSize: 13.sp, color: AppColors.primaryText),
-        ),
+        _buildText("Giáo viên: $teacher"),
         SizedBox(
           height: 8.w,
         ),
-        Text(
-          "Sĩ số: $studentCount",
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: AppColors.primaryText,
-          ),
-        ),
+        _buildText("Sĩ số: $studentCount"),
       ],
     ),
   );
@@ -93,10 +81,7 @@ Widget attandanceInforToday(String text,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Thông tin",
-          style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
-        ),
+        _buildTitle("Thông tin"),
         SizedBox(
           height: 8.w,
         ),
@@ -126,12 +111,7 @@ Widget attandanceInforToday(String text,
 }
 
 // widget detail for class schedule information
-Widget classScheduleInfo(
-  String title,
-  String timeLine1,
-  String timeLine2,
-  String timeLine3,
-) {
+Widget classScheduleInfo(String title, List<String> schedules) {
   return Container(
     width: double.infinity,
     padding: EdgeInsets.all(8.w),
@@ -141,32 +121,15 @@ Widget classScheduleInfo(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
-        ),
+        _buildTitle(title),
         SizedBox(
           height: 8.w,
         ),
-        Text(
-          timeLine1,
-          style: TextStyle(fontSize: 13.sp, color: AppColors.primaryText),
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Text(
-          timeLine2,
-          style: TextStyle(fontSize: 13.sp, color: AppColors.primaryText),
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Text(
-          timeLine3,
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: AppColors.primaryText,
+        SizedBox(height: 8.w),
+        ...schedules.map(
+          (schedule) => Padding(
+            padding: EdgeInsets.only(bottom: 8.w),
+            child: _buildText(schedule),
           ),
         ),
       ],
@@ -174,10 +137,14 @@ Widget classScheduleInfo(
   );
 }
 
-// widget for course detail
-Widget lessonDetail(
-    String title, String date, String lessonTitle, String dateAndTime,
-    {required VoidCallback onPressed1, required VoidCallback onPressed2}) {
+// widget for lesson detail
+Widget lessonDetail({
+  required BuildContext context,
+  required String title,
+  required List<Map<String, String>> lessons,
+  required VoidCallback onAttendancePressed,
+  required VoidCallback onAbsencePressed,
+}) {
   return Container(
     margin: EdgeInsets.only(bottom: 30.h),
     width: double.infinity,
@@ -193,40 +160,32 @@ Widget lessonDetail(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
-        ),
+        _buildTitle(title),
         SizedBox(
           height: 8.w,
         ),
-        Text(
-          date,
-          style: TextStyle(fontSize: 13.sp, color: AppColors.primaryText),
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Text(
-          lessonTitle,
-          style: TextStyle(fontSize: 13.sp, color: AppColors.primaryText),
-        ),
-        SizedBox(
-          height: 8.w,
-        ),
-        Text(
-          dateAndTime,
-          style: TextStyle(
-            fontSize: 11.sp,
-            color: AppColors.primarySecondaryElementText,
+        ...lessons.map(
+          (lesson) => Padding(
+            padding: EdgeInsets.only(bottom: 8.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildText("${lesson['topic']}: ${lesson['note']}",
+                    color: AppColors.primarySecondaryElement),
+                SizedBox(height: 4.w),
+                _buildText("T3, 11 - Thg10",
+                    fontSize: 11, color: AppColors.primarySecondaryElementText)
+              ],
+            ),
           ),
         ),
+        _buildText("Xem thêm..."),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            baseButton("Điểm danh", onPressed: onPressed1),
+            baseButton("Điểm danh", onPressed: onAttendancePressed),
             baseButton("Nghỉ",
-                color: AppColors.primaryElementBg, onPressed: onPressed2),
+                color: AppColors.primaryElementBg, onPressed: onAbsencePressed),
           ],
         )
       ],
@@ -278,6 +237,26 @@ Widget studentList(
         ),
         imageAndText(context, "Dương Quốc Minh", "3"),
       ],
+    ),
+  );
+}
+
+// rebuild title
+Widget _buildTitle(String title) {
+  return Text(
+    title,
+    style: TextStyle(fontSize: 18.sp, color: AppColors.primaryText),
+  );
+}
+
+//rebuild text
+Widget _buildText(String text,
+    {int fontSize = 13, Color color = AppColors.primaryText}) {
+  return Text(
+    text,
+    style: TextStyle(
+      fontSize: fontSize.sp,
+      color: color,
     ),
   );
 }

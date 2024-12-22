@@ -53,24 +53,36 @@ class _ClassDetailState extends State<ClassDetail> {
                   ),
                   child: Column(
                     children: [
-                      imageAndLessonTitle("11/10: Không có nội dung"),
+                      imageAndLessonTitle(classDetail.code),
                       classInfor(
                           classDetail.name,
                           classDetail.teachers[0].fullName,
                           classDetail.studentCount.toString()),
                       attandanceInforToday("có học"),
                       classScheduleInfo(
-                          "Lịch học",
-                          "${classDetail.schedules[0].dayOfWeek}: ${classDetail.schedules[0].startTime} - ${classDetail.schedules[0].startTime}",
-                          "${classDetail.schedules[1].dayOfWeek}: ${classDetail.schedules[1].startTime} - ${classDetail.schedules[1].startTime}",
-                          "${classDetail.schedules[2].dayOfWeek}: ${classDetail.schedules[2].startTime} - ${classDetail.schedules[2].startTime}"),
+                        "Lịch học",
+                        classDetail.schedules
+                            .map((schedule) =>
+                                "${schedule.dayOfWeek}: ${schedule.startTime} - ${schedule.endTime}")
+                            .toList(),
+                      ),
                       lessonDetail(
-                          "Tiết dạy",
-                          "T3, 11 - Thg 10",
-                          "${classDetail.lessons[0].topic}: ${classDetail.lessons[0].note}",
-                          "11/10 | 16:00 - 18:00",
-                          onPressed1: () {},
-                          onPressed2: () {}),
+                        context: context,
+                        title: "Tiết dạy",
+                        lessons: classDetail.lessons.map((lesson) {
+                          return {
+                            'topic': lesson.topic,
+                            'note': lesson.note,
+                          };
+                        }).toList(),
+                        onAttendancePressed: () {
+                          // Handle attendance logic
+                          print(classDetail.students[0].fullName);
+                        },
+                        onAbsencePressed: () {
+                          // Handle absence logic
+                        },
+                      ),
                       studentList(context),
                     ],
                   ),
