@@ -21,4 +21,13 @@ class AppRoutes {
   static const schoolSchedule = '/school_schedule';
   //home page
   static const homePage = '/home_page';
+
+  //exam page
+  static const examLesson = '/exam_lesson';
+
+  //exam overview page
+  static const examOverview = '/exam_overview';
+
+  //tool page
+  static const tools = '/tools';
 }

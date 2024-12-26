@@ -8,6 +8,9 @@ class AppColors {
   static const Color primarySecondaryBackground =
       Color.fromARGB(255, 247, 247, 249);
 
+  //blue dark background
+  static const Color primaryThirdBackground = Color.fromARGB(255, 1, 21, 72);
+
   /// main widget color blue
   static const Color primaryElement = Color.fromARGB(255, 12, 87, 227);
 

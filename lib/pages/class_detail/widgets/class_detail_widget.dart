@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/common/routes/names.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:e_learning_klass/common/widgets/base_button.dart';
 import 'package:e_learning_klass/common/widgets/base_show_dialog.dart';
@@ -165,21 +166,59 @@ Widget lessonDetail({
           height: 8.w,
         ),
         ...lessons.map(
-          (lesson) => Padding(
-            padding: EdgeInsets.only(bottom: 8.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildText("${lesson['topic']}: ${lesson['note']}",
-                    color: AppColors.primarySecondaryElement),
-                SizedBox(height: 4.w),
-                _buildText("T3, 11 - Thg10",
-                    fontSize: 11, color: AppColors.primarySecondaryElementText)
-              ],
-            ),
-          ),
+          (lesson) => _buildLessonDetail(context, lesson),
         ),
-        _buildText("Xem thêm..."),
+        GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return Dialog(
+                    child: Container(
+                      padding: EdgeInsets.all(12.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryBackground,
+                        borderRadius: BorderRadius.circular(8.w),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildText(
+                            "Danh sách bài học",
+                            color: AppColors.primarySecondaryElementText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          SizedBox(height: 12.h),
+                          ...lessons.map(
+                              (lesson) => _buildLessonDetail(context, lesson)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    // Thực hiện các thao tác cần thiết với danh sách học sinh đã chọn
+
+                                    Navigator.of(context).pop();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        AppColors.primarySecondaryElement,
+                                    foregroundColor:
+                                        AppColors.primaryBackground,
+                                    shape: const RoundedRectangleBorder(),
+                                  ),
+                                  child: const Text('OK'))
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            child: _buildText("Xem thêm...")),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -251,12 +290,37 @@ Widget _buildTitle(String title) {
 
 //rebuild text
 Widget _buildText(String text,
-    {int fontSize = 13, Color color = AppColors.primaryText}) {
+    {int fontSize = 13,
+    Color color = AppColors.primaryText,
+    FontWeight fontWeight = FontWeight.normal}) {
   return Text(
     text,
     style: TextStyle(
       fontSize: fontSize.sp,
       color: color,
+      fontWeight: fontWeight,
+    ),
+  );
+}
+
+//rebuild lesson detail
+Widget _buildLessonDetail(BuildContext context, Map<String, String> lesson) {
+  return Padding(
+    padding: EdgeInsets.only(bottom: 8.w),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.examLesson);
+          },
+          child: _buildText("${lesson['topic']}: ${lesson['note']}",
+              color: AppColors.primarySecondaryElement),
+        ),
+        SizedBox(height: 4.w),
+        _buildText("T3, 11 - Thg10",
+            fontSize: 11, color: AppColors.primarySecondaryElementText)
+      ],
     ),
   );
 }

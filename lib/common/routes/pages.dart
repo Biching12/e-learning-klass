@@ -1,4 +1,6 @@
 import 'package:e_learning_klass/common/routes/names.dart';
+import 'package:e_learning_klass/exam_overview/bloc/exam_overview_bloc.dart';
+import 'package:e_learning_klass/exam_overview/exam_overview.dart';
 import 'package:e_learning_klass/global.dart';
 import 'package:e_learning_klass/pages/all_students/all_students.dart';
 import 'package:e_learning_klass/pages/all_students/bloc/all_students_blocs.dart';
@@ -12,6 +14,9 @@ import 'package:e_learning_klass/pages/class_today/bloc/class_today_blocs.dart';
 import 'package:e_learning_klass/pages/class_today/class_today.dart';
 import 'package:e_learning_klass/pages/classes/bloc/classes_blocs.dart';
 import 'package:e_learning_klass/pages/classes/classes.dart';
+import 'package:e_learning_klass/pages/exam_lesson/bloc/exam_lesson_bloc.dart';
+import 'package:e_learning_klass/pages/exam_lesson/exam_lesson.dart';
+
 import 'package:e_learning_klass/pages/home/bloc/home_page_bloc.dart';
 import 'package:e_learning_klass/pages/home/home_page.dart';
 import 'package:e_learning_klass/pages/register/bloc/register_blocs.dart';
@@ -20,6 +25,8 @@ import 'package:e_learning_klass/pages/school_schedule/bloc/school_schedule_bloc
 import 'package:e_learning_klass/pages/school_schedule/school_schedule.dart';
 import 'package:e_learning_klass/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:e_learning_klass/pages/sign_in/sign_in.dart';
+import 'package:e_learning_klass/pages/tools/bloc/tools_bloc.dart';
+import 'package:e_learning_klass/pages/tools/tools.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:e_learning_klass/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +122,28 @@ class AppPages {
         bloc: BlocProvider(
           create: (_) => HomePageBloc(),
         ),
-      )
+      ),
+      PageEntity(
+        route: AppRoutes.examLesson,
+        page: const ExamLesson(),
+        bloc: BlocProvider(
+          create: (_) => ExamLessonBloc(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.examOverview,
+        page: const ExamOverview(),
+        bloc: BlocProvider(
+          create: (_) => ExamOverviewBloc(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.tools,
+        page: const Tools(),
+        bloc: BlocProvider(
+          create: (_) => ToolsBloc(),
+        ),
+      ),
     ];
   }
 
