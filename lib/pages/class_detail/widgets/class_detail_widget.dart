@@ -143,8 +143,8 @@ Widget lessonDetail({
   required BuildContext context,
   required String title,
   required List<Map<String, String>> lessons,
-  required VoidCallback onAttendancePressed,
-  required VoidCallback onAbsencePressed,
+  required Widget onAttendancePressed,
+  required Widget onAbsencePressed,
 }) {
   return Container(
     margin: EdgeInsets.only(bottom: 30.h),
@@ -220,11 +220,10 @@ Widget lessonDetail({
             },
             child: _buildText("Xem thêm...")),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            baseButton("Điểm danh", onPressed: onAttendancePressed),
-            baseButton("Nghỉ",
-                color: AppColors.primaryElementBg, onPressed: onAbsencePressed),
+            onAttendancePressed,
+            onAbsencePressed,
           ],
         )
       ],

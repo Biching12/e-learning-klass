@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:e_learning_klass/common/entities/refresh_token.dart';
+import 'package:e_learning_klass/common/routes/names.dart';
 
 import 'package:e_learning_klass/common/values/api_constants.dart';
 import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:e_learning_klass/global.dart';
+import 'package:flutter/material.dart';
 
 class HttpUtil {
   late Dio dio;
@@ -105,7 +107,14 @@ class HttpUtil {
         if (error.response?.statusCode != 401) {
           // Nếu lỗi 401, xóa token và chuyển người dùng về màn hình đăng nhập
           await Global.storageService.clearTokens();
-          print("Session expired. Logging out...");
+
+          print("Session expired. Redirecting to login...");
+
+          Navigator.of(Global.navigatorKey.currentContext!)
+              .pushNamedAndRemoveUntil(
+            AppRoutes.signIn,
+            (Route<dynamic> route) => false,
+          );
         }
         return handler.next(error);
       },

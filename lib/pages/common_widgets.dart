@@ -24,26 +24,12 @@ AppBar buildAppBar(String type) {
   );
 }
 
-//We need context for accessing bloc
-Widget buildTwoPartyLogin(BuildContext context) {
+Widget buildIcon(String iconName) {
   return Container(
-    margin: EdgeInsets.only(top: 40.h),
-    padding: EdgeInsets.only(left: 25.w, right: 25.w),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [_reusableIcons('google'), _reusableIcons('facebook')],
-    ),
-  );
-}
-
-Widget _reusableIcons(String iconName) {
-  return GestureDetector(
-    onTap: () {},
-    child: SizedBox(
-      width: 40.w,
-      height: 40.h,
-      child: Image.asset("assets/icons/$iconName.png"),
-    ),
+    margin: EdgeInsets.only(top: 20.w),
+    width: 100.w,
+    height: 100.h,
+    child: Image.asset("assets/icons/$iconName.png"),
   );
 }
 
@@ -147,7 +133,7 @@ Widget buildLogInAndRegButton(
           top: buttonType == "login" ? 40.h : 20.h, left: 50.w, right: 50.w),
       decoration: BoxDecoration(
           color: buttonType == "login"
-              ? AppColors.primaryElement
+              ? AppColors.primaryThirdBackground
               : AppColors.primaryBackground,
           borderRadius: BorderRadius.circular(15.w),
           border: Border.all(

@@ -1,6 +1,6 @@
 import 'package:e_learning_klass/common/routes/names.dart';
-import 'package:e_learning_klass/exam_overview/bloc/exam_overview_bloc.dart';
-import 'package:e_learning_klass/exam_overview/exam_overview.dart';
+import 'package:e_learning_klass/pages/exam_overview/bloc/exam_overview_bloc.dart';
+import 'package:e_learning_klass/pages/exam_overview/exam_overview.dart';
 import 'package:e_learning_klass/global.dart';
 import 'package:e_learning_klass/pages/all_students/all_students.dart';
 import 'package:e_learning_klass/pages/all_students/bloc/all_students_blocs.dart';
@@ -27,6 +27,10 @@ import 'package:e_learning_klass/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:e_learning_klass/pages/sign_in/sign_in.dart';
 import 'package:e_learning_klass/pages/tools/bloc/tools_bloc.dart';
 import 'package:e_learning_klass/pages/tools/tools.dart';
+import 'package:e_learning_klass/pages/tuition_student/bloc/tuition_student_bloc.dart';
+import 'package:e_learning_klass/pages/tuition_student/tuition_student.dart';
+import 'package:e_learning_klass/pages/tuition_teacher/bloc/tuition_teacher_bloc.dart';
+import 'package:e_learning_klass/pages/tuition_teacher/tuition_teacher.dart';
 import 'package:e_learning_klass/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:e_learning_klass/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +146,20 @@ class AppPages {
         page: const Tools(),
         bloc: BlocProvider(
           create: (_) => ToolsBloc(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.tuitionTeacher,
+        page: const TuitionTeacher(),
+        bloc: BlocProvider(
+          create: (_) => TuitionTeacherBloc(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.tuitionStudent,
+        page: const TuitionStudent(),
+        bloc: BlocProvider(
+          create: (_) => TuitionStudentBloc(),
         ),
       ),
     ];

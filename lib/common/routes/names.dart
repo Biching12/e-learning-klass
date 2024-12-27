@@ -30,4 +30,10 @@ class AppRoutes {
 
   //tool page
   static const tools = '/tools';
+
+  //view tuition for teachers
+  static const tuitionTeacher = '/tuition_teacher';
+
+  //view student's paid tuition
+  static const tuitionStudent = '/tuition_student';
 }

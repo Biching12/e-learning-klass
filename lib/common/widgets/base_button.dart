@@ -7,7 +7,6 @@ Widget baseButton(String text,
     Color color = AppColors.primarySecondaryElement}) {
   return Container(
     margin: EdgeInsets.only(top: 40.h),
-    alignment: Alignment.center,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -21,10 +20,10 @@ Widget baseButton(String text,
         foregroundColor: AppColors.primaryBackground,
         shadowColor: Colors.black.withOpacity(0.1),
         elevation: 6,
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 50,
-        ),
+        // padding: const EdgeInsets.symmetric(
+        //   vertical: 8,
+        //   horizontal: 50,
+        // ),
       ),
       onPressed: onPressed,
       child: Text(text),

@@ -71,6 +71,29 @@ class _BaseNavBarState extends State<BaseNavBar> {
             title: baseText("Bảng điều khiển"),
             onTap: () {},
           ),
+          currentUserData.role == "TEACHER"
+              ? ListTile(
+                  leading: Icon(
+                    Icons.attach_money_rounded,
+                    color: AppColors.primarySecondaryElementText,
+                    size: 20.w,
+                  ),
+                  title: baseText("Tài chính"),
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.tuitionTeacher);
+                  },
+                )
+              : ListTile(
+                  leading: Icon(
+                    Icons.attach_money_rounded,
+                    color: AppColors.primarySecondaryElementText,
+                    size: 20.w,
+                  ),
+                  title: baseText("Học phí"),
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.tuitionStudent);
+                  },
+                ),
           ListTile(
             leading: Icon(
               Icons.calendar_today,
