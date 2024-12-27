@@ -166,6 +166,7 @@ class AppPages {
 
         if (result.first.route == AppRoutes.initial && deviceFirstOpen) {
           bool isLoggedIn = Global.storageService.getIsLoggedIn();
+
           // print("the user have loggin : $isLoggedIn");
           if (isLoggedIn) {
             return MaterialPageRoute(
