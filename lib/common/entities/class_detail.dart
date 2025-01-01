@@ -4,22 +4,23 @@ class ClassDetailEntity {
   final String? backgroundUrl;
   final int capacity;
   final int studentCount;
+  final String tuitionFee;
   final List<TeacherEntity> teachers;
   final List<ScheduleEntity> schedules;
   final List<LessonEntity> lessons;
   final List<StudentEntity> students;
 
-  ClassDetailEntity({
-    required this.code,
-    required this.name,
-    this.backgroundUrl,
-    required this.capacity,
-    required this.studentCount,
-    required this.teachers,
-    required this.schedules,
-    required this.lessons,
-    required this.students,
-  });
+  ClassDetailEntity(
+      {required this.code,
+      required this.name,
+      this.backgroundUrl,
+      required this.capacity,
+      required this.studentCount,
+      required this.teachers,
+      required this.schedules,
+      required this.lessons,
+      required this.students,
+      required this.tuitionFee});
 
   factory ClassDetailEntity.fromJson(Map<String, dynamic> json) {
     return ClassDetailEntity(
@@ -28,6 +29,7 @@ class ClassDetailEntity {
       backgroundUrl: json['background_url'],
       capacity: json['capacity'],
       studentCount: json['student_count'],
+      tuitionFee: json['tuition_fee'],
       teachers: (json['teachers'] as List)
           .map((e) => TeacherEntity.fromJson(e))
           .toList(),

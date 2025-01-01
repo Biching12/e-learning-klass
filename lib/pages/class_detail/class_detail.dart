@@ -1,4 +1,7 @@
+import 'package:e_learning_klass/common/apis/payment.dart';
+import 'package:e_learning_klass/common/entities/entities.dart';
 import 'package:e_learning_klass/common/values/colors.dart';
+
 import 'package:e_learning_klass/common/widgets/base_app_bar.dart';
 import 'package:e_learning_klass/common/widgets/base_button.dart';
 import 'package:e_learning_klass/common/widgets/base_nav_bar.dart';
@@ -8,9 +11,10 @@ import 'package:e_learning_klass/pages/class_detail/bloc/class_detail_events.dar
 import 'package:e_learning_klass/pages/class_detail/bloc/class_detail_states.dart';
 
 import 'package:e_learning_klass/pages/class_detail/widgets/class_detail_widget.dart';
+import 'package:e_learning_klass/pages/payment_page/paypal_payment_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -72,7 +76,8 @@ class _ClassDetailState extends State<ClassDetail> {
                       classInfor(
                           classDetail.name,
                           classDetail.teachers[0].fullName,
-                          classDetail.studentCount.toString()),
+                          classDetail.studentCount.toString(),
+                          classDetail.tuitionFee),
                       attandanceInforToday("có học"),
                       classScheduleInfo(
                         "Lịch học",
@@ -103,76 +108,38 @@ class _ClassDetailState extends State<ClassDetail> {
                             : baseButton(
                                 "Nộp học phí",
                                 color: AppColors.primaryElementStatus,
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        PaypalCheckoutView(
-                                      sandboxMode: true,
-                                      clientId:
-                                          "Afu50i1zd2U5i5MdqCJ5oGcsfs6LoH6WTld2QVUBhr_BY5350vmGU5m984WiCbBxY8VA7iGO80shPX-Q",
-                                      secretKey:
-                                          "EOqwG0z0-FET20HWxdV9rjV0NAoJHh3gJRz-lE7bxnVNHT_QZKeNWEcua9kDCVKaBF23Y88yi5BmXH_C",
-                                      transactions: const [
-                                        {
-                                          "amount": {
-                                            "total": '70',
-                                            "currency": "USD",
-                                            "details": {
-                                              "subtotal": '70',
-                                              "shipping": '0',
-                                              "shipping_discount": 0
-                                            }
-                                          },
-                                          "description":
-                                              "The payment transaction description.",
-                                          // "payment_options": {
-                                          //   "allowed_payment_method":
-                                          //       "INSTANT_FUNDING_SOURCE"
-                                          // },
-                                          "item_list": {
-                                            "items": [
-                                              {
-                                                "name": "Apple",
-                                                "quantity": 4,
-                                                "price": '5',
-                                                "currency": "USD"
-                                              },
-                                              {
-                                                "name": "Pineapple",
-                                                "quantity": 5,
-                                                "price": '10',
-                                                "currency": "USD"
-                                              }
-                                            ],
-
-                                            // shipping address is not required though
-                                            //   "shipping_address": {
-                                            //     "recipient_name": "tharwat",
-                                            //     "line1": "Alexandria",
-                                            //     "line2": "",
-                                            //     "city": "Alexandria",
-                                            //     "country_code": "EG",
-                                            //     "postal_code": "21505",
-                                            //     "phone": "+00000000",
-                                            //     "state": "Alexandria"
-                                            //  },
-                                          }
-                                        }
-                                      ],
-                                      note:
-                                          "Contact us for any questions on your order.",
-                                      onSuccess: (Map params) async {
-                                        print("onSuccess: $params");
-                                      },
-                                      onError: (error) {
-                                        print("onError: $error");
-                                        Navigator.pop(context);
-                                      },
-                                      onCancel: () {
-                                        print('cancelled:');
-                                      },
-                                    ),
-                                  ));
+                                onPressed: () async {
+                                  try {
+                                    final request = CreateOrderRequestEntity(
+                                      method: "PAYPAL",
+                                      amount: 200,
+                                      classroomId: 100,
+                                      note: "Thanh toán học phí",
+                                    );
+                                    final response =
+                                        await PaymentAPI.createOrder(
+                                            params: request);
+                                    if (response.success) {
+                                      final approvalUrl = response
+                                          .data.order.links
+                                          .firstWhere(
+                                              (link) => link.rel == 'approve')
+                                          .href;
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PaypalPaymentPage(
+                                            approvalUrl: approvalUrl,
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      // Xử lý khi tạo đơn hàng không thành công
+                                    }
+                                  } catch (e) {
+                                    // Xử lý lỗi
+                                  }
                                 },
                               ),
                       ),

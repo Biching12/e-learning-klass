@@ -43,7 +43,8 @@ Widget imageAndLessonTitle(String text) {
 }
 
 // widget for second part in class detail
-Widget classInfor(String title, String teacher, String studentCount) {
+Widget classInfor(
+    String title, String teacher, String studentCount, String tuitionFee) {
   return Container(
     width: double.infinity,
     padding: EdgeInsets.all(8.w),
@@ -62,6 +63,10 @@ Widget classInfor(String title, String teacher, String studentCount) {
           height: 8.w,
         ),
         _buildText("Sĩ số: $studentCount"),
+        SizedBox(
+          height: 8.w,
+        ),
+        _buildText("Học phí: $tuitionFee/tháng"),
       ],
     ),
   );

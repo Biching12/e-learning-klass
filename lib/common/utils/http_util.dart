@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:e_learning_klass/common/entities/refresh_token.dart';
-import 'package:e_learning_klass/common/routes/names.dart';
 
 import 'package:e_learning_klass/common/values/api_constants.dart';
 import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:e_learning_klass/global.dart';
-import 'package:flutter/material.dart';
 
 class HttpUtil {
   late Dio dio;
@@ -65,8 +63,12 @@ class HttpUtil {
 
         if (isExpired) {
           try {
-            final response = await HttpUtil().post(AppAPI.refreshToken,
-                data: {"refresh_token": refreshToken});
+            // Create header Authorization with Bearer token
+            final Map<String, String> headers = {
+              "Authorization": "Bearer $refreshToken"
+            };
+            final response = await HttpUtil()
+                .post(AppAPI.refreshToken, data: {}, headers: headers);
 
             // Parse response thành RefreshTokenResponseEntity
             final refreshResponse =
@@ -109,12 +111,6 @@ class HttpUtil {
           await Global.storageService.clearTokens();
 
           print("Session expired. Redirecting to login...");
-
-          Navigator.of(Global.navigatorKey.currentContext!)
-              .pushNamedAndRemoveUntil(
-            AppRoutes.signIn,
-            (Route<dynamic> route) => false,
-          );
         }
         return handler.next(error);
       },
