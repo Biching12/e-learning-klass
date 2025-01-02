@@ -29,9 +29,9 @@ class StorageService {
   }
 
   bool getIsLoggedIn() {
-    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN) == null
-        ? false
-        : true;
+    return _prefs.getString(AppConstants.STORAGE_ACCESS_TOKEN) != null
+        ? true
+        : false;
   }
 
   CurrentUserDataEntity getCurrentUserData() {

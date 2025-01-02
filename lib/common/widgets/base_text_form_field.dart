@@ -7,6 +7,8 @@ Widget buildTextFormField({
   TextEditingController? controller,
   TextInputType keyboardType = TextInputType.text,
   String? Function(String?)? validator,
+  bool readOnly = false,
+  VoidCallback? onTap,
 }) {
   return TextFormField(
     controller: controller,
@@ -14,13 +16,27 @@ Widget buildTextFormField({
     validator: validator ??
         (value) {
           if (isRequired && (value == null || value.isEmpty)) {
-            return 'Trường này là bắt buộc';
+            return 'This field is required';
           }
           return null;
         },
+    onTap: onTap,
+    readOnly: readOnly,
     decoration: InputDecoration(
-      labelText: isRequired ? '$labelText*' : labelText,
-      labelStyle: const TextStyle(color: Colors.grey, fontSize: 14.0),
+      label: RichText(
+        text: TextSpan(
+          text: labelText,
+          style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+          children: isRequired
+              ? [
+                  const TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ]
+              : [],
+        ),
+      ),
       floatingLabelStyle:
           const TextStyle(color: AppColors.primaryElementStatus),
       border: const UnderlineInputBorder(

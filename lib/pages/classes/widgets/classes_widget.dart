@@ -66,7 +66,7 @@ Widget lineAndText() {
             text: const TextSpan(
               children: [
                 TextSpan(
-                  text: "Những trường không có dấu sao ",
+                  text: "Fields without an asterisk ",
                   style: TextStyle(
                     color:
                         AppColors.primarySecondaryElementText, // Màu chữ chính
@@ -81,7 +81,7 @@ Widget lineAndText() {
                   ),
                 ),
                 TextSpan(
-                  text: " không bắt buộc",
+                  text: " are optional.",
                   style: TextStyle(
                     color: AppColors.primarySecondaryElementText,
                     fontSize: 16,

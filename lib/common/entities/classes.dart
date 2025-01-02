@@ -1,3 +1,66 @@
+class ClassroomRequestEntity {
+  String name;
+  int capacity;
+  String tuitionFee;
+  String startDate;
+  String endDate;
+  List<Schedule> schedules;
+
+  ClassroomRequestEntity({
+    required this.name,
+    required this.capacity,
+    required this.tuitionFee,
+    required this.startDate,
+    required this.endDate,
+    required this.schedules,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'capacity': capacity,
+      'tuition_fee': tuitionFee,
+      'start_date': startDate,
+      'end_date': endDate,
+      'schedules': schedules.map((schedule) => schedule.toJson()).toList(),
+    };
+  }
+}
+
+class Schedule {
+  int dayOfWeek;
+  String startTime;
+  String endTime;
+
+  Schedule({
+    required this.dayOfWeek,
+    required this.startTime,
+    required this.endTime,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'day_of_week': dayOfWeek,
+      'start_time': startTime,
+      'end_time': endTime,
+    };
+  }
+}
+
+class CreateClassroomResponseEntity {
+  bool success;
+
+  CreateClassroomResponseEntity({
+    required this.success,
+  });
+
+  factory CreateClassroomResponseEntity.fromJson(Map<String, dynamic> json) {
+    return CreateClassroomResponseEntity(
+      success: json['success'],
+    );
+  }
+}
+
 class ClassroomResponseEntity {
   final bool success;
   final List<ClassroomDataEntity> items;
