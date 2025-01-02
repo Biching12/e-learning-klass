@@ -278,7 +278,8 @@ Widget studentList(
             )),
           ),
         ),
-        imageAndText(context, "Dương Quốc Minh", "3"),
+        imageAndText(context,
+            fullName: "Dương Quốc Minh", id: "3", avatarUrl: null),
       ],
     ),
   );

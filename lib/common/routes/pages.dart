@@ -3,7 +3,7 @@ import 'package:e_learning_klass/pages/exam_overview/bloc/exam_overview_bloc.dar
 import 'package:e_learning_klass/pages/exam_overview/exam_overview.dart';
 import 'package:e_learning_klass/global.dart';
 import 'package:e_learning_klass/pages/all_students/all_students.dart';
-import 'package:e_learning_klass/pages/all_students/bloc/all_students_blocs.dart';
+import 'package:e_learning_klass/pages/all_students/bloc/all_students_bloc.dart';
 import 'package:e_learning_klass/pages/all_teachers/all_teachers.dart';
 import 'package:e_learning_klass/pages/all_teachers/bloc/all_teachers_blocs.dart';
 import 'package:e_learning_klass/pages/application/application_page.dart';
@@ -76,7 +76,7 @@ class AppPages {
         route: AppRoutes.allStudents,
         page: const AllStudents(),
         bloc: BlocProvider(
-          create: (_) => AllStudentsBlocs(),
+          create: (_) => AllStudentsBloc(),
         ),
       ),
       //Router for class detail screen

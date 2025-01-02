@@ -4,22 +4,25 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget imageAndText(BuildContext context, String text, String subtext,
-    {bool changeText = true}) {
+Widget imageAndText(BuildContext context,
+    {bool changeText = true,
+    required String fullName,
+    required String id,
+    required String? avatarUrl}) {
   return ListTile(
     leading: CircleAvatar(
-      backgroundColor: Colors.grey[300],
-      child: Icon(Icons.person, color: Colors.grey[700]),
+      backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl) : null,
+      child: avatarUrl == null ? const Icon(Icons.person) : null,
     ),
     title: Text(
-      text,
+      fullName,
       style: TextStyle(
         fontSize: 16.sp,
         color: AppColors.primaryText, // Adjust color based on your theme
       ),
     ),
     subtitle: Text(
-      "Số ngày nghỉ: $subtext",
+      "Số ngày nghỉ: $id",
       style: TextStyle(
         fontSize: 14.sp,
         color: AppColors

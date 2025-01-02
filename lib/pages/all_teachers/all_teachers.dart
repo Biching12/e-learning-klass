@@ -50,7 +50,10 @@ class _AllTeachersState extends State<AllTeachers> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return imageAndText(context, "Liễu Như Hoa", "3",
+                  return imageAndText(context,
+                      fullName: "Liễu Như Hoa",
+                      id: "3",
+                      avatarUrl: null,
                       changeText: false);
                 },
               ),
