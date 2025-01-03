@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 Widget imageAndText(BuildContext context,
     {bool changeText = true,
     required String fullName,
-    required String id,
+    required String absent,
     required String? avatarUrl}) {
   return ListTile(
     leading: CircleAvatar(
@@ -22,7 +22,7 @@ Widget imageAndText(BuildContext context,
       ),
     ),
     subtitle: Text(
-      "Số ngày nghỉ: $id",
+      "Absent: $absent",
       style: TextStyle(
         fontSize: 14.sp,
         color: AppColors

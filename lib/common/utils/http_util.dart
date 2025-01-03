@@ -4,6 +4,7 @@ import 'package:e_learning_klass/common/entities/refresh_token.dart';
 import 'package:e_learning_klass/common/values/api_constants.dart';
 import 'package:e_learning_klass/common/values/constant.dart';
 import 'package:e_learning_klass/global.dart';
+import 'package:flutter/material.dart';
 
 class HttpUtil {
   late Dio dio;
@@ -60,7 +61,7 @@ class HttpUtil {
               .next(options); // Skip the request if the expiredTime is invalid
         }
         final isExpired = DateTime.now().isAfter(expiredTimeConvert);
-
+        debugPrint("isExpired: $isExpired");
         if (isExpired) {
           try {
             // Create header Authorization with Bearer token
@@ -100,6 +101,8 @@ class HttpUtil {
           } on DioException catch (error) {
             return handler.reject(error, true);
           }
+        } else {
+          print("errrrdasdasdsadsadsadsad");
         }
       },
       onResponse: (response, handle) {
@@ -108,7 +111,6 @@ class HttpUtil {
       onError: (error, handler) async {
         if (error.response?.statusCode != 401) {
           // Nếu lỗi 401, xóa token và chuyển người dùng về màn hình đăng nhập
-          await Global.storageService.clearTokens();
 
           print("Session expired. Redirecting to login...");
         }

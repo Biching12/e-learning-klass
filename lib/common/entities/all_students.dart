@@ -1,3 +1,27 @@
+class AddStudentRequestEntity {
+  final String email;
+
+  AddStudentRequestEntity({required this.email});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+    };
+  }
+}
+
+class AddStudentResponseEntity {
+  final bool success;
+
+  AddStudentResponseEntity({required this.success});
+
+  factory AddStudentResponseEntity.fromJson(Map<String, dynamic> json) {
+    return AddStudentResponseEntity(
+      success: json['success'] as bool,
+    );
+  }
+}
+
 class AllStudentsResponseEntity {
   final bool success;
   final AllStudentsData data;

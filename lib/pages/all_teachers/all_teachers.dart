@@ -52,7 +52,7 @@ class _AllTeachersState extends State<AllTeachers> {
                 itemBuilder: (context, index) {
                   return imageAndText(context,
                       fullName: "Liễu Như Hoa",
-                      id: "3",
+                      absent: "3",
                       avatarUrl: null,
                       changeText: false);
                 },

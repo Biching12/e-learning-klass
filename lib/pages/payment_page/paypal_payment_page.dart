@@ -1,3 +1,4 @@
+import 'package:e_learning_klass/pages/payment_page/payment_success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -18,34 +19,31 @@ class _PaypalPaymentPageState extends State<PaypalPaymentPage> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
+          onHttpAuthRequest: (request) {},
+          onHttpError: (error) {},
+          onProgress: (progress) {},
+          onUrlChange: (change) {},
           onPageStarted: (String url) {
-            // check if user order complete
+            if (url.contains('capture')) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PaymentSuccessPage(),
+                ),
+              );
+            }
           },
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) {
+            // Navigator.pushReplacement(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => const PaymentSuccessPage(),
+            //   ),
+            // );
+          },
         ),
       )
       ..loadRequest(Uri.parse(widget.approvalUrl));
-  }
-
-  void _showPaymentSuccessDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Thanh toán thành công'),
-          content: Text('Cảm ơn bạn đã thanh toán học phí.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Đóng dialog và quay lại trang trước
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-              },
-              child: Text('Đóng'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override

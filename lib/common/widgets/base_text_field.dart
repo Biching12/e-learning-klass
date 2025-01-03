@@ -1,8 +1,12 @@
 import 'package:e_learning_klass/common/values/colors.dart';
 import 'package:flutter/material.dart';
 
-Widget baseTextField({String text = "Tìm kiếm..."}) {
+Widget baseTextField({
+  String text = "Search...",
+  TextEditingController? controller,
+}) {
   return TextField(
+    controller: controller,
     decoration: InputDecoration(
       hintText: text, // Placeholder text
       hintStyle: const TextStyle(

@@ -50,6 +50,7 @@ class _ClassDetailState extends State<ClassDetail> {
     }
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final currentUserData = _navBavController.currentUserData;
@@ -61,6 +62,7 @@ class _ClassDetailState extends State<ClassDetail> {
           } else if (state is ClassDetailLoaded) {
             final classDetail = state.classDetail;
             return Scaffold(
+              key: _scaffoldKey,
               backgroundColor: AppColors.primaryBackground,
               appBar: buildAppBar(context),
               drawer: const BaseNavBar(),
@@ -100,11 +102,12 @@ class _ClassDetailState extends State<ClassDetail> {
                           onPressed: () {},
                         ),
                         onAbsencePressed: currentUserData.role == "TEACHER"
-                            ? baseButton(
-                                "Nghỉ",
-                                color: AppColors.primaryThirdElement,
-                                onPressed: () {},
-                              )
+                            ? Container()
+                            // baseButton(
+                            //     "Nghỉ",
+                            //     color: AppColors.primaryThirdElement,
+                            //     onPressed: () {},
+                            //   )
                             : baseButton(
                                 "Nộp học phí",
                                 color: AppColors.primaryElementStatus,
@@ -125,15 +128,17 @@ class _ClassDetailState extends State<ClassDetail> {
                                           .firstWhere(
                                               (link) => link.rel == 'approve')
                                           .href;
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PaypalPaymentPage(
-                                            approvalUrl: approvalUrl,
+                                      if (context.mounted) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PaypalPaymentPage(
+                                              approvalUrl: approvalUrl,
+                                            ),
                                           ),
-                                        ),
-                                      );
+                                        );
+                                      }
                                     } else {
                                       // Xử lý khi tạo đơn hàng không thành công
                                     }

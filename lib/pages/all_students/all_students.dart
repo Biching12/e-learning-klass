@@ -55,7 +55,7 @@ class _AllStudentsState extends State<AllStudents> {
                         children: [
                           buildText("20",
                               color: AppColors.primarySecondaryElementText),
-                          buildText("Tất cả",
+                          buildText("All",
                               color: AppColors.primarySecondaryElementText,
                               right: 140),
                           baseIcon(const Icon(Icons.filter_list)),
@@ -78,7 +78,7 @@ class _AllStudentsState extends State<AllStudents> {
                       return imageAndText(context,
                           avatarUrl: student.avatarUrl,
                           fullName: student.fullName,
-                          id: student.id.toString());
+                          absent: student.id.toString());
                     },
                   ),
                 )

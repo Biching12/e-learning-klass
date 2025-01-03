@@ -20,6 +20,7 @@ class AppAPI {
   static const String statisticalDashboard = '/dashboard';
   //POST method
   static const String createNewClassroom = '/classroom';
+  static const String addStudent = '/classroom/add-student';
 
   //API for Payment
   //POST method
